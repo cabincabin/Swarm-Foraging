@@ -1,0 +1,41 @@
+Count = 0
+State = 0
+CountMax = 200
+turn = 0
+function init(){
+	Count = 0 
+	State = -1
+	math.rng.setseed(id)
+}
+
+##this is bad. Ask pincy about a better way
+
+function step() {
+	debug.print(State)
+	if(State == -1 and math.rng.uniform(10001)>9950){
+		set_wheels(0.0,0.0)
+		State = 0
+	} 
+	if(State == 0 and Count < CountMax){
+		set_wheels(10.0,10.0)
+		Count = Count + 1 
+	}
+	else if (State == 0){
+		State = 1
+	}
+	
+if(State == 1 and Count > 0){
+		set_wheels(-10.0,-10.0)
+		Count = Count - 1 
+	}
+	else if (State == 1){
+		State = -1
+		goto(0,0)
+	}
+}
+ 
+function reset(){
+}
+# Execute at exit
+function destroy() {
+}

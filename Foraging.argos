@@ -1,0 +1,244 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <!-- ************************* -->
+  <!-- * General configuration * -->
+  <!-- ************************* -->
+  <framework>
+    <system threads="0" />
+    <experiment length="0"
+                ticks_per_second="10"
+                random_seed="123" />
+  </framework>
+
+  <!-- *************** -->
+  <!-- * Controllers * -->
+  <!-- *************** -->
+  <controllers>
+
+    <buzz_controller_kheperaiv id="shape_formation">
+      <actuators>
+        <differential_steering implementation="default" />
+        <range_and_bearing     implementation="default" />
+        <leds                  implementation="default" medium="leds" />
+      </actuators>
+      <sensors>
+        <range_and_bearing implementation="medium" medium="rab" show_rays="true" />
+        <kheperaiv_light   implementation="rot_z_only" />
+      </sensors>
+      <params>
+        <wheel_turning hard_turn_angle_threshold="90"
+                       soft_turn_angle_threshold="70"
+                       no_turn_angle_threshold="10"
+                       max_speed="10" />
+      </params>
+    </buzz_controller_kheperaiv>
+
+  </controllers>
+
+  <!-- *********************** -->
+  <!-- * Arena configuration * -->
+  <!-- *********************** -->
+  <arena size="10, 10, 1" center="0,0,0.5">
+
+    <light id="light"
+           position="0,0,0.5"
+           orientation="0,0,0"
+           color="yellow"
+           intensity="3.0"
+           medium="light" />
+
+    <box id="wall_north" size="8,0.1,0.5" movable="false">
+      <body position="0,4,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_south" size="8,0.1,0.5" movable="false">
+      <body position="0,-4,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_east" size="0.1,8,0.5" movable="false">
+      <body position="4,0,0" orientation="0,0,0" />
+    </box>
+    <box id="wall_west" size="0.1,8,0.5" movable="false">
+      <body position="-4,0,0" orientation="0,0,0" />
+    </box>
+
+    <!--
+        You can distribute entities randomly. Here, we distribute
+        20 foot-bots in this way:
+        - the position is uniformly distributed
+        on the ground, in the square whose corners are (-2,-2) and (2,2)
+        - the orientations are non-zero only when rotating around Z and chosen
+        from a gaussian distribution, whose mean is zero degrees and
+        standard deviation is 360 degrees.
+    -->
+    <distribute>
+      <position method="constant" values="0.4,0,0"/>
+      <orientation method="constant" values="0,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values="0.36955,0.153,0"/>
+      <orientation method="constant" values="22.5,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv1" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values=".28284,.2828,0"/>
+      <orientation method="constant" values="45,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv2" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values=".153,0.36955,0"/>
+      <orientation method="constant" values="67.5,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv3" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values="0,.4,0"/>
+      <orientation method="constant" values="90,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv4" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values="-.153,.36955,0"/>
+      <orientation method="constant" values="112.5,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv5" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values="-.2828,.2828,0"/>
+      <orientation method="constant" values="135,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv6" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values="-.36955,.153,0"/>
+      <orientation method="constant" values="157,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv7" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values="-.4,0,0"/>
+      <orientation method="constant" values="180,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv8" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values="-0.36955,-.153,0"/>
+      <orientation method="constant" values="202.5,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv9" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values="-.2828,-.2828,0"/>
+      <orientation method="constant" values="225,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv10" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values="-0.153,-0.36955,0"/>
+      <orientation method="constant" values="247.5,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv11" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values="0,-.4,0"/>
+      <orientation method="constant" values="270,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv12" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values=".153,-.36955,0"/>
+      <orientation method="constant" values="292.5,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv13" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values=".2828,-.2828,0"/>
+      <orientation method="constant" values="315,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv14" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+    <distribute>
+      <position method="constant" values=".36955,-.153,0"/>
+      <orientation method="constant" values="337.5,0,0"/>
+      <entity quantity="1" max_trials="100">
+        <kheperaiv id="kiv15" rab_data_size="500">
+          <controller config="shape_formation" />
+        </kheperaiv>
+      </entity>
+    </distribute>
+  </arena>
+
+  <!-- ******************* -->
+  <!-- * Physics engines * -->
+  <!-- ******************* -->
+  <physics_engines>
+    <dynamics2d id="dyn2d" />
+  </physics_engines>
+
+  <!-- ********* -->
+  <!-- * Media * -->
+  <!-- ********* -->
+  <media>
+    <range_and_bearing id="rab" />
+    <led id="leds" />
+    <led id="light" />
+  </media>
+
+  <!-- ****************** -->
+  <!-- * Visualization * -->
+  <!-- ****************** -->
+  <visualization>
+    <qt-opengl>
+      <user_functions label="buzz_qt" />
+    </qt-opengl>
+  </visualization>
+
+</argos-configuration>
