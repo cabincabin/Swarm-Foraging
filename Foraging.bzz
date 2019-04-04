@@ -2,6 +2,8 @@ Count = 0
 State = 0
 CountMax = 200
 turn = 0
+
+
 function init(){
 	Count = 0 
 	State = -1
@@ -9,29 +11,35 @@ function init(){
 }
 
 ##this is bad. Ask pincy about a better way
-
-function step() {
-	debug.print(State)
-	if(State == -1 and math.rng.uniform(10001)>9950){
+function stateneg1(){
+	if(math.rng.uniform(10001)>9950){
 		set_wheels(0.0,0.0)
 		State = 0
-	} 
-	if(State == 0 and Count < CountMax){
+	} c
+}
+function state0(){
+	if(Count < CountMax){
 		set_wheels(10.0,10.0)
 		Count = Count + 1 
 	}
-	else if (State == 0){
+	else{
 		State = 1
 	}
-	
-if(State == 1 and Count > 0){
+}
+
+function state1(){
+	if(Count > 0){
 		set_wheels(-10.0,-10.0)
 		Count = Count - 1 
 	}
-	else if (State == 1){
+	else{
 		State = -1
 		goto(0,0)
 	}
+}
+
+function step() {
+	debug.print(State)
 }
  
 function reset(){
