@@ -11,35 +11,43 @@ function init(){
 }
 
 ##this is bad. Ask pincy about a better way
-function stateneg1(){
+function state0(){
 	if(math.rng.uniform(10001)>9950){
 		set_wheels(0.0,0.0)
-		State = 0
-	} c
-}
-function state0(){
-	if(Count < CountMax){
-		set_wheels(10.0,10.0)
-		Count = Count + 1 
-	}
-	else{
 		State = 1
 	}
 }
 
 function state1(){
+	if(Count < CountMax){
+		set_wheels(10.0,10.0)
+		Count = Count + 1 
+	}
+	else{
+		State = 2
+	}
+}
+
+function state2(){
 	if(Count > 0){
 		set_wheels(-10.0,-10.0)
 		Count = Count - 1 
 	}
 	else{
-		State = -1
+		State = 0
 		goto(0,0)
 	}
 }
 
 function step() {
-	debug.print(State)
+	debug.print(id, ":", State)
+	if(State == 0){
+		state0()
+	} else if(State == 1){
+		state1()
+	} else if(State == 2){
+		state2()
+	}
 }
  
 function reset(){
