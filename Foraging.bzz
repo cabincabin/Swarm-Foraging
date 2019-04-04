@@ -2,36 +2,68 @@ Count = 0
 State = 0
 CountMax = 200
 turn = 0
+
 function init(){
 	Count = 0 
-	State = -1
+	State = 0
 	math.rng.setseed(id)
 }
 
 ##this is bad. Ask pincy about a better way
 
+# at_hive()
+# return True (1) if at the hive
+# return False (0) if not at the hive
+function at_hive() {
+	var hive_threshold = 0.550 # Threshold compared to light reading to determine if at hive
+	var loop_counter = 0
+	var max_reading = 0;
+	var max_angle = 0;
+
+	while (loop_counter < 8) {
+		
+		light_obj = light[loop_counter]
+		light_reading = light_obj['value']
+		light_angle = light_obj['angle']
+		
+		if (max_reading < light_reading) {
+			max_reading = light_reading
+			max_angle = light_angle
+		}
+		loop_counter = loop_counter + 1
+	}
+	log(id, " reading: ", max_reading, " angle: ", max_angle)
+		
+	if (max_reading > hive_threshold) {
+		return 1
+	}	else {
+		return 0
+	}	
+}
+
 function step() {
+	log(id, "status: ", at_hive())
 	debug.print(State)
-	if(State == -1 and math.rng.uniform(10001)>9950){
+	if(State == 0 and math.rng.uniform(10001)>9950){
 		set_wheels(0.0,0.0)
-		State = 0
+		State = 1
 	} 
-	if(State == 0 and Count < CountMax){
+	if(State == 1 and Count < CountMax){
 		set_wheels(10.0,10.0)
 		Count = Count + 1 
 	}
-	else if (State == 0){
-		State = 1
+	else if (State == 1){
+		State = 2
 	}
 	
-if(State == 1 and Count > 0){
+if(State == 2 and Count > 0){
 		set_wheels(-10.0,-10.0)
 		Count = Count - 1 
 	}
-	else if (State == 1){
-		State = -1
+	else if (State == 2){
+		State = 0
 		goto(0,0)
-	}
+}
 }
  
 function reset(){
