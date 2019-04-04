@@ -48,6 +48,13 @@
            intensity="3.0"
            medium="light" />
 
+   <light id="food"
+          position="1,1,0.5"
+          orientation="0,0,0"
+          color="blue"
+          intensity="3.0"
+          medium="light" />
+
     <box id="wall_north" size="8,0.1,0.5" movable="false">
       <body position="0,4,0" orientation="0,0,0" />
     </box>
