@@ -10,6 +10,36 @@ function init(){
 
 ##this is bad. Ask pincy about a better way
 
+# at_hive()
+# return True (1) if at the hive
+# return False (0) if not at the hive
+function at_hive() {
+	var hive_threshold = 0.550 # Threshold compared to light reading to determine if at hive
+	var loop_counter = 0
+	var max_reading = 0;
+	var max_angle = 0;
+
+	while (loop_counter < 8) {
+		
+		light_obj = light[loop_counter]
+		light_reading = light_obj['value']
+		light_angle = light_obj['angle']
+		
+		if (max_reading < light_reading) {
+			max_reading = light_reading
+			max_angle = light_angle
+		}
+		loop_counter = loop_counter + 1
+	}
+	log(id, " reading: ", max_reading, " angle: ", max_angle)
+		
+	if (max_reading > hive_threshold) {
+		return 1
+	}	else {
+		return 0
+	}	
+}
+
 function step() {
 	debug.print(State)
 	if(State == 0 and math.rng.uniform(10001)>9950){
