@@ -23,8 +23,8 @@
         <leds                  implementation="default" medium="leds" />
       </actuators>
       <sensors>
-        <range_and_bearing implementation="medium" medium="rab" show_rays="true" />
-        <kheperaiv_light   implementation="rot_z_only" />
+        <range_and_bearing implementation="medium" medium="rab" show_rays="false" />
+        <kheperaiv_light   implementation="rot_z_only" show_rays="true"/>
       </sensors>
       <params>
         <wheel_turning hard_turn_angle_threshold="90"
@@ -47,6 +47,13 @@
            color="yellow"
            intensity="3.0"
            medium="light" />
+   <light id="light2"
+           position="1,1,0.5"
+           orientation="0,0,0"
+	   color="green"
+           intensity="7.0"
+           medium="light" />
+
 
     <box id="wall_north" size="8,0.1,0.5" movable="false">
       <body position="0,4,0" orientation="0,0,0" />
