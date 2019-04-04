@@ -6,7 +6,7 @@ turn = 0
 
 function init(){
 	Count = 0 
-	State = -1
+	State = 0
 	math.rng.setseed(id)
 }
 
@@ -40,6 +40,12 @@ function state2(){
 }
 
 function step() {
+	if(id == 0){
+		var test = light[0]
+		log(test['angle'])
+		log(test['value'])
+	}
+
 	debug.print(id, ":", State)
 	if(State == 0){
 		state0()
