@@ -1,25 +1,130 @@
 Count = 0
-State = 0
+State = 'H'
 CountMax = 200
-turn = 0
+CountState = 0
 
+path = {}
+
+usePath = 0
+
+CanBeacon = 0
+#THIS CAN BE SWAPPED OUT WITH
+#neighbors.listen("key",
+#   function(vid, value, rid) {
+#      log("Got (", vid, ",", value, ") from robot #", rid)
+#   }
+#)
+v = stigmergy.create(1)
 
 function init(){
 	Count = 0 
-	State = 0
+	State = 'H'
 	math.rng.setseed(id)
+	foodandrange={}
+	foodandrange["food"] = 0
+	foodandrange["range"] = 0
+	v.put(id, foodandrange)
 }
-
-##this is bad. Ask pincy about a better way
 # at_hive()
 # return True (1) if at the hive
 # return False (0) if not at the hive
-function at_hive() {
-	var hive_threshold = 0.550 # Threshold compared to light reading to determine if at hive
-	var loop_counter = 0
-	var max_reading = 0;
-	var max_angle = 0;
+#function at_hive() {
+#	var hive_threshold = 0.550 # Threshold compared to light reading to determine if at hive
+#	var loop_counter = 0
+#	var max_reading = 0;
+#	var max_angle = 0;
 
+#	while (loop_counter < 8) {
+		
+#		light_obj = light[loop_counter]
+#		light_reading = light_obj['value']
+#		light_angle = light_obj['angle']
+		
+#		if (max_reading < light_reading) {
+#			max_reading = light_reading
+#			max_angle = light_angle
+#		}
+#		loop_counter = loop_counter + 1
+#	}
+#	log(id, " reading: ", max_reading, " angle: ", max_angle)
+		
+#	if (max_reading > hive_threshold) {
+#		return 1
+#	}	else {
+#		return 0
+#	}	
+#}
+
+function stateHome(){
+
+	if(math.rng.uniform(10001)>9950){
+		set_wheels(0.0,0.0)
+		State = 'S'
+		CountState = 1
+		if(usePath == 0){
+			path = {}
+			CanBeacon = 0
+		}
+	}
+}
+function record(lf, rw, bcn){
+	if(CountState == 1 and usePath == 0){
+		temp = {}
+		temp["lf"] = lf
+		temp["rw"] = rw
+		temp["bcn"] = bcn
+		path[Count] = temp
+	
+		}
+
+}
+
+#move the specified way in the specified direction
+function setWheelsCount(){
+	set_wheels(CountState*path[Count]["lf"],CountState*path[Count]["rw"])
+}
+function stateSearch(){
+	if(Count < CountMax){
+		record(10.0,10.0, 0)
+		setWheelsCount()
+	}
+	else{
+		CountState = -1
+		State = 'R'
+	}
+}
+
+function stateReturn(){
+	if(Count > 0){
+		setWheelsCount()
+	}
+	else{
+		State = 'H'
+		CountState = 0
+		foodandrange = v.get(id)
+		foodandrange["food"] = 0
+		foodandrange["range"] = count
+		v.put(id,foodandrange)
+		goto(0,0)
+	}
+}
+
+function checkBeacon(){
+	neighbors.foreach(
+  function(rid, data) {
+  if(v.get[rid]["food"] == 1){
+		State = 'T'
+		dToFood = v.get[rid]["range"]
+		angToRob = data.azimuth
+		CanBeacon = 1
+	}
+
+ })
+}
+
+function checkFood(){
+max_reading = 0 
+loop_counter = 0
 	while (loop_counter < 8) {
 		
 		light_obj = light[loop_counter]
@@ -32,52 +137,60 @@ function at_hive() {
 		}
 		loop_counter = loop_counter + 1
 	}
-	log(id, " reading: ", max_reading, " angle: ", max_angle)
-		
-	if (max_reading > hive_threshold) {
-		return 1
-	}	else {
-		return 0
-	}	
-}
 
-function state0(){
-	if(math.rng.uniform(10001)>9950){
-		set_wheels(0.0,0.0)
-		State = 1
-	}
-}
-
-function state1(){
-	if(Count < CountMax){
-		set_wheels(10.0,10.0)
-		Count = Count + 1 
+	if(max_reading >=0.85){
+		debug.print("Food!")
+		usePath = 1
+		CanBeacon = 1
+		foodandrange = v.get(id)
+		foodandrange["food"] = 1
+		foodandrange["range"] = count
+		v.put(id,foodandrange)
+		State = 'R'
+		CountState = -1
 	}
 	else{
-		State = 2
+		debug.print(Count, ":", max_reading)
 	}
 }
 
-function state2(){
-	if(Count > 0){
-		set_wheels(-10.0,-10.0)
-		Count = Count - 1 
-	}
-	else{
-		State = 0
-		goto(0,0)
-	}
+RotateTheta(){
+
 }
 
 function step() {
-	debug.print(id, ":", State)
-	if(State == 0){
-		state0()
-	} else if(State == 1){
-		state1()
-	} else if(State == 2){
-		state2()
+	#debug.print(Count, ":", State)
+
+	if(State == 'H'){
+		stateHome()
+	} else if(State == 'S'){
+		stateSearch()
+		checkFood()
+		if(CanBeacon == 0)
+			checkBeacon()
+		
+	} else if(State == 'R'){
+		if(usePath==1){
+			foodandrange = v.get(id)
+			foodandrange["range"] = count
+			v.put(id,foodandrange)
+		}
+		stateReturn()
 	}
+	} else if(State == "T"){
+		rotateTheta()
+	}
+
+
+#__________________________________#
+#states for counting, 0 is no count, 1 is positive count, -1 is negitive count
+	if(CountState == 1){
+		Count = Count + 1
+	}
+	if(CountState == -1){
+		Count = Count - 1
+	}
+#__________________________________#
 }
  
 function reset(){
