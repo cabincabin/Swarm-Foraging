@@ -2,7 +2,8 @@ Count = 0
 State = 'H'
 CountMax = 200
 CountState = 0
-
+dToFood = 0
+angToRob=0
 path = {}
 
 usePath = 0
@@ -112,12 +113,12 @@ function stateReturn(){
 function checkBeacon(){
 	neighbors.foreach(
   function(rid, data) {
-  if(v.get[rid]["food"] == 1){
-		State = 'T'
-		dToFood = v.get[rid]["range"]
-		angToRob = data.azimuth
-		CanBeacon = 1
-	}
+  	if(v.get(rid)["food"] == 1){
+			State = 'T'
+			dToFood = v.get(rid)["range"]
+			angToRob = data.azimuth
+			CanBeacon = 1
+		}
 
  })
 }
@@ -154,8 +155,8 @@ loop_counter = 0
 	}
 }
 
-RotateTheta(){
-
+function rotateTheta(){
+	goto(0,0)
 }
 
 function step() {
@@ -176,10 +177,10 @@ function step() {
 			v.put(id,foodandrange)
 		}
 		stateReturn()
-	}
 	} else if(State == "T"){
 		rotateTheta()
 	}
+	
 
 
 #__________________________________#
