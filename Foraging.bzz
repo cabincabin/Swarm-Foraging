@@ -57,8 +57,11 @@ function init(){
 #}
 
 function stateHome(){
-
-	if(math.rng.uniform(10001)>9950){
+	foodandrange = v.get(id)
+	foodandrange["food"] = 0
+	foodandrange["range"] = Count
+	v.put(id,foodandrange)
+	if(math.rng.uniform(10001)>9950 and usePath == 0){
 		set_wheels(0.0,0.0)
 		State = 'S'
 		CountState = 1
@@ -82,6 +85,10 @@ function record(lf, rw, bcn){
 
 #move the specified way in the specified direction
 function setWheelsCount(){
+
+		foodandrange = v.get(id)
+		foodandrange["range"] = Count
+		v.put(id,foodandrange)
 	set_wheels(CountState*path[Count]["lf"],CountState*path[Count]["rw"])
 }
 function stateSearch(){
@@ -104,26 +111,53 @@ function stateReturn(){
 		CountState = 0
 		foodandrange = v.get(id)
 		foodandrange["food"] = 0
-		foodandrange["range"] = count
+		foodandrange["range"] = Count
 		v.put(id,foodandrange)
 		goto(0,0)
+	}
+}
+
+function rotateTheta(){
+	if(math.abs(angToRob)<3.14159/5){
+		record(0.0,0.0,0)
+		setWheelsCount()
+		State = 'S'
+	}
+	else{
+#Moves 2pi/331 a tick
+		debug.print("AngToRob", angToRob)
+		if(angToRob<0){
+			record(1.0, -1.0,0)
+			setWheelsCount()
+			angToRob = angToRob + 2*3.14159/331
+			#debug.print(pose.orientation.azimuth)
+		}
+		else{
+			record(-1.0, 1.0,0)
+			setWheelsCount()
+			angToRob = angToRob - 2*3.14159/331
+		}
 	}
 }
 
 function checkBeacon(){
 	neighbors.foreach(
   function(rid, data) {
-  	if(v.get(rid)["food"] == 1){
+		debug.print("IS: ", v.get(rid)["range"])
+  	if(v.get(rid)["food"] == 1  and v.get(rid)["range"] > 10){
+			#debug.print("IS: ", rid, data, data.azimuth)
 			State = 'T'
 			dToFood = v.get(rid)["range"]
 			angToRob = data.azimuth
 			CanBeacon = 1
+			CountMax = 300
 		}
 
  })
 }
 
 function checkFood(){
+#NEEDSS TO BE VECTOR SUMMMM!!!!
 max_reading = 0 
 loop_counter = 0
 	while (loop_counter < 8) {
@@ -138,14 +172,16 @@ loop_counter = 0
 		}
 		loop_counter = loop_counter + 1
 	}
-
+	if(id == 70){
+		max_reading = max_reading + 0.08	
+	}
 	if(max_reading >=0.85){
 		debug.print("Food!")
 		usePath = 1
 		CanBeacon = 1
 		foodandrange = v.get(id)
 		foodandrange["food"] = 1
-		foodandrange["range"] = count
+		foodandrange["range"] = Count
 		v.put(id,foodandrange)
 		State = 'R'
 		CountState = -1
@@ -155,9 +191,6 @@ loop_counter = 0
 	}
 }
 
-function rotateTheta(){
-	goto(0,0)
-}
 
 function step() {
 	#debug.print(Count, ":", State)
@@ -173,7 +206,7 @@ function step() {
 	} else if(State == 'R'){
 		if(usePath==1){
 			foodandrange = v.get(id)
-			foodandrange["range"] = count
+			foodandrange["range"] = Count
 			v.put(id,foodandrange)
 		}
 		stateReturn()
@@ -185,7 +218,7 @@ function step() {
 
 #__________________________________#
 #states for counting, 0 is no count, 1 is positive count, -1 is negitive count
-	if(CountState == 1){
+	if(CountState == 1){		foodandrange["food"] = 0
 		Count = Count + 1
 	}
 	if(CountState == -1){
