@@ -1,14 +1,17 @@
-Count = 0
-State = 'H'
+Count = 0#Steps away from hive
+#the state to perform. H is home, S is Search, R is Return (home), T is Rotate to theta degrees
+State = 'H' 
+#How long a bot has to look for food before going home
 CountMax = 200
+#Do we count forwards, indicating searching, backwords, indicating returning home, or 0, no count increase
 CountState = 0
-dToFood = 0
+dToFood = 0 #Count to food, will need to do Countmax minus this to get the actual distance, this should be renamed to d to nest
 angToRob=0
-path = {}
+path = {}#each count creates an associated move vector
 
-usePath = 0
+usePath = 0 #use the path when searching?
 
-CanBeacon = 0
+CanBeacon = 0 #Can recieve a beacon signal, triggerinbg a turn. This name is misleading, as 0 is true and 1 is false
 #THIS CAN BE SWAPPED OUT WITH
 #neighbors.listen("key",
 #   function(vid, value, rid) {
@@ -18,7 +21,7 @@ CanBeacon = 0
 v = stigmergy.create(1)
 
 function init(){
-	Count = 0 
+	Count = 0  
 	State = 'H'
 	math.rng.setseed(id)
 	foodandrange={}
@@ -55,7 +58,8 @@ function init(){
 #		return 0
 #	}	
 #}
-
+#IF HOME, turn off food beacon
+#if food was not found, reset the path, and allow for a beacon trigger
 function stateHome(){
 	foodandrange = v.get(id)
 	foodandrange["food"] = 0
@@ -71,6 +75,7 @@ function stateHome(){
 		}
 	}
 }
+#record the current path into count to return home
 function record(lf, rw, bcn){
 	if(CountState == 1 and usePath == 0){
 		temp = {}
@@ -84,6 +89,7 @@ function record(lf, rw, bcn){
 }
 
 #move the specified way in the specified direction
+#update the range from the nest
 function setWheelsCount(){
 
 		foodandrange = v.get(id)
@@ -91,6 +97,8 @@ function setWheelsCount(){
 		v.put(id,foodandrange)
 	set_wheels(CountState*path[Count]["lf"],CountState*path[Count]["rw"])
 }
+
+#look for the food
 function stateSearch(){
 	if(Count < CountMax){
 		record(10.0,10.0, 0)
@@ -102,6 +110,7 @@ function stateSearch(){
 	}
 }
 
+#go back on the path from which you came
 function stateReturn(){
 	if(Count > 0){
 		setWheelsCount()
@@ -117,6 +126,7 @@ function stateReturn(){
 	}
 }
 
+#turn to some function of where the robot who found food is, then GO
 function rotateTheta(){
 	if(math.abs(angToRob)<3.14159/5){
 		record(0.0,0.0,0)
@@ -140,6 +150,8 @@ function rotateTheta(){
 	}
 }
 
+
+#if the neighbor has beaconed and found food, than accept the beacon and initiate a turn
 function checkBeacon(){
 	neighbors.foreach(
   function(rid, data) {
@@ -156,6 +168,8 @@ function checkBeacon(){
  })
 }
 
+
+#see if we're close to the light. If we are, start beaconing, and return home
 function checkFood(){
 #NEEDSS TO BE VECTOR SUMMMM!!!!
 max_reading = 0 
@@ -191,7 +205,7 @@ loop_counter = 0
 	}
 }
 
-
+#state maching
 function step() {
 	#debug.print(Count, ":", State)
 
