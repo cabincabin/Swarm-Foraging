@@ -1,4 +1,6 @@
-Count = 0#Steps away from hive
+include "include/vec2.bzz"
+
+Count = 0 #Steps away from hive
 #the state to perform. H is home, S is Search, R is Return (home), T is Rotate to theta degrees
 State = 'H' 
 #How long a bot has to look for food before going home
@@ -7,7 +9,7 @@ CountMax = 200
 CountState = 0
 dToFood = 0 #Count to food, will need to do Countmax minus this to get the actual distance, this should be renamed to d to nest
 angToRob=0
-path = {}#each count creates an associated move vector
+path = {} #each count creates an associated move vector
 
 usePath = 0 #use the path when searching?
 
@@ -171,26 +173,24 @@ function checkBeacon(){
 
 #see if we're close to the light. If we are, start beaconing, and return home
 function checkFood(){
-#NEEDSS TO BE VECTOR SUMMMM!!!!
-max_reading = 0 
+sumVector = math.vec2.newp(0,0)
 loop_counter = 0
-	while (loop_counter < 8) {
-		
+valid_sensors = 0
+	while(loop_counter < 8) {
 		light_obj = light[loop_counter]
-		light_reading = light_obj['value']
-		light_angle = light_obj['angle']
-		
-		if (max_reading < light_reading) {
-			max_reading = light_reading
-			max_angle = light_angle
+		if(light_obj['value'] != 0){
+			currVector = math.vec2.newp(light_obj['value'], light_obj['angle'])
+			sumVector = math.vec2.add(sumVector, currVector)
+			valid_sensors = valid_sensors + 1
 		}
+		sumVector.x = sumVector.x/valid_sensors
+		sumVector.y = sumVector.y/valid_sensors
 		loop_counter = loop_counter + 1
 	}
-	if(id == 70){
-		max_reading = max_reading + 0.08	
-	}
-	if(max_reading >=0.85){
+	
+	if(valid_sensors != 0 and math.vec2.length(sumVector) >= 3){
 		debug.print("Food!")
+		log(id, ":Food at ", math.vec2.length(sumVector))
 		usePath = 1
 		CanBeacon = 1
 		foodandrange = v.get(id)
@@ -201,9 +201,14 @@ loop_counter = 0
 		CountState = -1
 	}
 	else{
-		debug.print(Count, ":", max_reading)
+		debug.print(Count, ":", math.vec2.length(sumVector))
 	}
 }
+
+
+
+
+
 
 #state maching
 function step() {

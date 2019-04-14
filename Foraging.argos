@@ -51,7 +51,7 @@
            position="-1.75,1.75,0.5"
            orientation="0,0,0"
 	   color="green"
-           intensity="7.0"
+	   intensity="4.0"
            medium="light" />
 
 
