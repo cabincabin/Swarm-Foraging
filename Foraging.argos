@@ -16,15 +16,18 @@
   <!-- *************** -->
   <controllers>
 
-    <buzz_controller_kheperaiv id="shape_formation">
+    <buzz_controller_footbot id="shape_formation">
       <actuators>
         <differential_steering implementation="default" />
         <range_and_bearing     implementation="default" />
         <leds                  implementation="default" medium="leds" />
       </actuators>
       <sensors>
-        <range_and_bearing implementation="medium" medium="rab" show_rays="false" />
-        <kheperaiv_light   implementation="rot_z_only" show_rays="true"/>
+        <range_and_bearing implementation="medium" medium="rab" show_rays="true" />
+        <footbot_light   implementation="rot_z_only" show_rays="true"/>
+        <colored_blob_omnidirectional_camera implementation="rot_z_only"
+                                     medium="leds" />
+
       </sensors>
       <params>
         <wheel_turning hard_turn_angle_threshold="90"
@@ -32,7 +35,7 @@
                        no_turn_angle_threshold="10"
                        max_speed="10" />
       </params>
-    </buzz_controller_kheperaiv>
+    </buzz_controller_footbot>
 
   </controllers>
 
@@ -45,13 +48,13 @@
            position="0,0,0.5"
            orientation="0,0,0"
            color="yellow"
-           intensity="3.0"
+           intensity="0.0"
            medium="light" />
    <light id="light2"
-           position="1,1,0.5"
+           position="-1.75,1.75,0.5"
            orientation="0,0,0"
 	   color="green"
-           intensity="7.0"
+           intensity="0.0"
            medium="light" />
 
 
@@ -77,150 +80,15 @@
         from a gaussian distribution, whose mean is zero degrees and
         standard deviation is 360 degrees.
     -->
-    <distribute>
-      <position method="constant" values="0.4,0,0"/>
-      <orientation method="constant" values="0,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values="0.36955,0.153,0"/>
-      <orientation method="constant" values="22.5,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv1" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values=".28284,.2828,0"/>
-      <orientation method="constant" values="45,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv2" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values=".153,0.36955,0"/>
-      <orientation method="constant" values="67.5,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv3" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values="0,.4,0"/>
-      <orientation method="constant" values="90,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv4" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values="-.153,.36955,0"/>
-      <orientation method="constant" values="112.5,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv5" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values="-.2828,.2828,0"/>
-      <orientation method="constant" values="135,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv6" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values="-.36955,.153,0"/>
-      <orientation method="constant" values="157,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv7" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values="-.4,0,0"/>
-      <orientation method="constant" values="180,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv8" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values="-0.36955,-.153,0"/>
-      <orientation method="constant" values="202.5,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv9" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values="-.2828,-.2828,0"/>
-      <orientation method="constant" values="225,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv10" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values="-0.153,-0.36955,0"/>
-      <orientation method="constant" values="247.5,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv11" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values="0,-.4,0"/>
-      <orientation method="constant" values="270,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv12" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values=".153,-.36955,0"/>
-      <orientation method="constant" values="292.5,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv13" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values=".2828,-.2828,0"/>
-      <orientation method="constant" values="315,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv14" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
-    <distribute>
-      <position method="constant" values=".36955,-.153,0"/>
-      <orientation method="constant" values="337.5,0,0"/>
-      <entity quantity="1" max_trials="100">
-        <kheperaiv id="kiv15" rab_data_size="500">
-          <controller config="shape_formation" />
-        </kheperaiv>
-      </entity>
-    </distribute>
+    <foot-bot id="foot_0" rab_data_size="500" rab_range="0.4">
+      <body position="0.4,0,0" orientation="0,0,0" />
+      <controller config="shape_formation" />
+    </foot-bot>
+    <foot-bot id="foot_1" rab_data_size="500" rab_range="0.4">
+      <body position="0.8,0,0" orientation="0,0,0" />
+      <controller config="shape_formation" />
+    </foot-bot>
+
   </arena>
 
   <!-- ******************* -->
