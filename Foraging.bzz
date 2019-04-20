@@ -1,51 +1,56 @@
+# Swarm Final Project
+var another_counter = 0
 
+function reset_led() {
+	var counter = 0
+	while (counter < 11){
+		counter = counter + 1
+		set_led(0, 0, 0, 0)
+	}
+}
 
+function set_top_led() {
+	set_led(12,255,255,255)
+}
+
+function set_led_half(start) {
+	var counter = 0
+	while (counter < 6) {
+
+		if ((counter + start) > 11) {
+			set_led((counter + start) - 12, 0, 255, 0)
+		} else {
+			set_led(counter + start, 0, 255, 0)
+		}
+
+		if ((counter + start + 6) > 11) {
+			set_led((counter + start) - 6, 255, 0, 0)
+		} else {
+			set_led(counter + start + 6, 255, 0, 0)
+		}
+
+		counter = counter + 1
+	} 
+}
+
+# Initialization
 function init(){
 	camera_enable()
 }
-# at_hive()
-# return True (1) if at the hive
-# return False (0) if not at the hive
-#function at_hive() {
-#	var hive_threshold = 0.550 # Threshold compared to light reading to determine if at hive
-#	var loop_counter = 0
-#	var max_reading = 0;
-#	var max_angle = 0;
-
-#	while (loop_counter < 8) {
-		
-#		light_obj = light[loop_counter]
-#		light_reading = light_obj['value']
-#		light_angle = light_obj['angle']
-		
-#		if (max_reading < light_reading) {
-#			max_reading = light_reading
-#			max_angle = light_angle
-#		}
-#		loop_counter = loop_counter + 1
-#	}
-#	log(id, " reading: ", max_reading, " angle: ", max_angle)
-		
-#	if (max_reading > hive_threshold) {
-#		return 1
-#	}	else {
-#		return 0
-#	}	
-#}
-#IF HOME, turn off food beacon
-#if food was not found, reset the path, and allow for a beacon trigger
 
 #state maching
 function step() {
 	#debug.print(Count, ":", State)
-	set_led(1,255,255,255)
-
+	another_counter = another_counter + 1
+	reset_led()
+	set_led_half(another_counter % 12)
+	
 	if (id == 1){
 		set_wheels(-1.0,1.0)
 	}
 #__________________________________#
 }
- 
+
 function reset(){
 }
 # Execute at exit
