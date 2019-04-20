@@ -27,7 +27,7 @@
         <footbot_light   implementation="rot_z_only" show_rays="true"/>
         <colored_blob_omnidirectional_camera implementation="rot_z_only"
                                      medium="leds" />
-
+        <footbot_proximity implementation="default" show_rays="true" />
       </sensors>
       <params>
         <wheel_turning hard_turn_angle_threshold="90"
@@ -80,14 +80,15 @@
         from a gaussian distribution, whose mean is zero degrees and
         standard deviation is 360 degrees.
     -->
-    <foot-bot id="foot_0" rab_data_size="500" rab_range="0.4">
-      <body position="0.4,0,0" orientation="0,0,0" />
-      <controller config="shape_formation" />
-    </foot-bot>
-    <foot-bot id="foot_1" rab_data_size="500" rab_range="0.4">
-      <body position="0.8,0,0" orientation="0,0,0" />
-      <controller config="shape_formation" />
-    </foot-bot>
+    <distribute>
+      <position method="uniform" min="-4,-4,0" max="4,4,0" />
+      <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
+      <entity quantity="20" max_trials="100">
+        <foot-bot id="fb">
+          <controller config="shape_formation" />
+        </foot-bot>
+      </entity>
+    </distribute>
 
   </arena>
 
