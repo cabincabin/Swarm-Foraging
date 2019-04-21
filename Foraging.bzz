@@ -4,6 +4,9 @@ numRobots = 20
 DoneTable = 1
 var another_counter = 0
 
+#-------------------LED STUFF--------------------------#
+
+
 function reset_led() {
 	var counter = 0
 	while (counter < 11){
@@ -46,68 +49,6 @@ function set_led_half(start) {
 	} 
 }
 
-# Call a specific random walk
-function random_walk() {
-	obstacle_avoidance()
-}
-
-function obstacle_avoidance() {
-	var magnitude = 5.0
-	#log("Obstacle avoiding")
-		var problem = read_proximity().problem_a
-		#log(problem)
-		# Decide whether to turn left or right
-		x = magnitude * math.cos(math.pi + problem)
-		y = magnitude * math.sin(math.pi + problem)
-	
-		# If angle is behind robot, nothing is detected
-		if (problem == -math.pi) {
-			# Nothing is detected
-			set_wheels(magnitude, magnitude)
-		}	 else {
-		
-			# Something is detected
-			#	Isolate near 0 cases to avoid errors
-			if (x < 0.000001 and x > -0.000001){
-				x = 0
-			}
-
-			if (y < 0.000001 and y > -0.000001){
-				y = 0
-			}
-
-			# log("Wheel Speed X: ", x)
-			# log("Wheel Speed Y: ", y)
-			# Go to point that is opposite side from obstacle
-			gotoc(x / 2, y / 2)
-			#gotop(1,  
-		}
-}
-
-function read_proximity() {
-
-	# Iterate through all the proximity sensors, find detections
-	var counter = 0
-	
-	var max_reading = 0.0
-	var problem_angle = -math.pi
-
-	while (counter < 23 and (loop_counter < 3 or loop_counter > 21)) {
-		var frontValue = proximity[counter].value
-		var frontAngle = proximity[counter].angle
-		if (frontValue > max_reading) {
-			max_reading = frontValue
-			problem_angle = frontAngle # log the problem angle
-			#log("Obstacle detected in front of Sensor: ", counter)
-			#log("Reading: ", max_reading, " Angle: ", frontAngle)
-		}
-		counter = counter + 1
-	}
-	
-	# Setup the return table
-	t = { .max_r = max_reading, .problem_a = problem_angle}
-	return t
-}
 
 # determine_half()
 function determine_half(point) {
@@ -150,6 +91,82 @@ function determine_half(point) {
 	# Set the leds, convert to a number between 0 - 11
 	set_led_half(return_ang * 1.90985)
 }
+
+
+#----------------------WALKING STUFF------------------------#
+
+
+# Call a specific random walk
+function random_walk() {
+	obstacle_avoidance()
+}
+
+function obstacle_avoidance() {
+	var magnitude = 5.0
+	#log("Obstacle avoiding")
+		var problem = read_proximity().problem_a
+		#log(problem)
+		# Decide whether to turn left or right
+		x = magnitude * math.cos(math.pi + problem)
+		y = magnitude * math.sin(math.pi + problem)
+	
+		# If angle is behind robot, nothing is detected
+		if (problem == -math.pi) {
+			# Nothing is detected
+			set_wheels(magnitude, magnitude)
+		}	 else {
+		
+			# Something is detected
+			#	Isolate near 0 cases to avoid errors
+			if (x < 0.000001 and x > -0.000001){
+				x = 0
+			}
+
+			if (y < 0.000001 and y > -0.000001){
+				y = 0
+			}
+
+			# log("Wheel Speed X: ", x)
+			# log("Wheel Speed Y: ", y)
+			# Go to point that is opposite side from obstacle
+			gotoc(x / 2, y / 2)
+			#gotop(1,  
+		}
+}
+
+
+#----------------------_SENSOR READING-------------------_#
+
+
+function read_proximity() {
+
+	# Iterate through all the proximity sensors, find detections
+	var counter = 0
+	
+	var max_reading = 0.0
+	var problem_angle = -math.pi
+
+	while (counter < 23 and (loop_counter < 3 or loop_counter > 21)) {
+		var frontValue = proximity[counter].value
+		var frontAngle = proximity[counter].angle
+		if (frontValue > max_reading) {
+			max_reading = frontValue
+			problem_angle = frontAngle # log the problem angle
+			#log("Obstacle detected in front of Sensor: ", counter)
+			#log("Reading: ", max_reading, " Angle: ", frontAngle)
+		}
+		counter = counter + 1
+	}
+	
+	# Setup the return table
+	t = { .max_r = max_reading, .problem_a = problem_angle}
+	return t
+}
+
+
+
+#-----------------DEFAULT FUNCTIONS-------------------#
+
 
 # Initialization
 function init(){
