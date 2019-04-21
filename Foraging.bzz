@@ -101,6 +101,44 @@ function random_walk() {
 	obstacle_avoidance()
 }
 
+
+#THRESH:the threshold for the force sum, how accurately do we have to be at the force sum
+#xInit: how much we want to prioritize going in the direction it's already going
+function SumBlobsMoveInForce(Thresh, xInit){
+	if(size(blobs) > 0){
+		forceX = xInit
+		forceY = 0
+		foreach(blobs, function(key, value) {
+				dir = 1
+ 	     if(value['color']['red'] == 255){
+					dir = -1
+				}
+				forceX = forceX + dir*math.cos(value.angle)
+				forceY = forceY + dir*math.sin(value.angle)
+	    })
+
+		turnAng = math.atan(forceX,forceY)
+		if(turnAng < 0){
+			turnAng = 2*math.pi + turnAng
+		}
+		debug.print(turnAng)
+		if(turnAng > 2*math.pi - math.pi/Thresh or turnAng < math.pi/Thresh){
+				random_walk()
+		}
+		else{
+			if(turnAng > pi){
+				set_wheels(-1.0, 1.0)
+			}
+			else{
+				set_wheels(-1.0, 1.0)
+			}
+		}
+	}
+
+
+}
+
+
 function obstacle_avoidance() {
 	var magnitude = 5.0
 	#log("Obstacle avoiding")
@@ -185,7 +223,7 @@ function step() {
 	#debug.print(Count, ":", State)
 	#another_counter = another_counter + 1
 	#set_led_half(another_counter % 12)
-	random_walk()
+	SumBlobsMoveInForce(15, 1)
 
 	#if(size(v.get(DonTable))>= numRobots){
 	#	Debug.print("DONE")
