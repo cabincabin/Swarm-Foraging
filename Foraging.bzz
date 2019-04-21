@@ -52,6 +52,7 @@ function set_led_half(start) {
 
 # determine_half()
 function determine_half(point) {
+	log(id, " updating LEDs")
 	# Determine where to place the split in lights
 	
 	# The point to which the red side should face
@@ -104,34 +105,34 @@ function random_walk() {
 function obstacle_avoidance() {
 	var magnitude = 5.0
 	#log("Obstacle avoiding")
-		var problem = read_proximity().problem_a
-		#log(problem)
-		# Decide whether to turn left or right
-		x = magnitude * math.cos(math.pi + problem)
-		y = magnitude * math.sin(math.pi + problem)
+	var problem = read_proximity().problem_a
+	#log(problem)
+	# Decide whether to turn left or right
+	x = magnitude * math.cos(math.pi + problem)
+	y = magnitude * math.sin(math.pi + problem)
 	
-		# If angle is behind robot, nothing is detected
-		if (problem == -math.pi) {
-			# Nothing is detected
-			set_wheels(magnitude, magnitude)
-		}	 else {
-		
-			# Something is detected
-			#	Isolate near 0 cases to avoid errors
-			if (x < 0.000001 and x > -0.000001){
-				x = 0
-			}
-
-			if (y < 0.000001 and y > -0.000001){
-				y = 0
-			}
-
-			# log("Wheel Speed X: ", x)
-			# log("Wheel Speed Y: ", y)
-			# Go to point that is opposite side from obstacle
-			gotoc(x / 2, y / 2)
-			#gotop(1,  
+	# If angle is behind robot, nothing is detected
+	if (problem == -math.pi) {
+		# Nothing is detected
+		set_wheels(magnitude, magnitude)
+	}	 else {
+	
+		# Something is detected
+		#	Isolate near 0 cases to avoid errors
+		if (x < 0.000001 and x > -0.000001){
+			x = 0
 		}
+
+		if (y < 0.000001 and y > -0.000001){
+			y = 0
+		}
+
+		# log("Wheel Speed X: ", x)
+		# log("Wheel Speed Y: ", y)
+		# Go to point that is opposite side from obstacle
+		gotoc(x / 2, y / 2)
+		#gotop(1,  
+	}
 }
 
 
@@ -163,6 +164,35 @@ function read_proximity() {
 	return t
 }
 
+# at_food()
+# return True (1) if at the food
+# return False (0) if not at the food
+function at_food() {	
+	var food_threshold = 0.80 # Threshold compared to light reading to determine if at food
+	var loop_counter2 = 0
+	var max_reading = 0;
+	var max_angle = 0;
+
+	while (loop_counter2 < 24) {
+		light_obj = light[loop_counter2]
+		light_reading = light_obj['value']
+		light_angle = light_obj['angle']
+	
+		if (max_reading < light_reading) {
+			max_reading = light_reading
+			max_angle = light_angle
+		}
+		loop_counter2 = loop_counter2 + 1
+	}
+	
+	if (max_reading > food_threshold) {
+		return 1
+	}	else {
+		return 0
+	}	
+}
+
+
 
 
 #-----------------DEFAULT FUNCTIONS-------------------#
@@ -171,22 +201,32 @@ function read_proximity() {
 # Initialization
 function init(){
 	camera_enable()
+	found_food = 0
+	
 	#v = stigmergy.create(DoneTable) 
 	#v.put(DoneTable, {})
 }
 
 #state maching
 function step() {
+	#if we found the food, remember that we did and remember where we found it
+	if((not found_food) and at_food()){
+		a_pose = pose.position
 
-	# the point where all the robots face their red side
-	point2 = {.x = 2.0, .y = 2.0}
-
-	determine_half(point2)
+		food_loc = {.x = a_pose.x, .y = a_pose.y}
+		found_food = 1
+		log("food found at: (",food_loc.x,", ",food_loc.y,")")
+	}
+	#if we have found food at one point, update our lights to point to the food
+	if(found_food == 1){
+		determine_half(food_loc)
+	}
+	
 	#debug.print(Count, ":", State)
 	#another_counter = another_counter + 1
 	#set_led_half(another_counter % 12)
 	random_walk()
-
+	debug.print(found_food)
 	#if(size(v.get(DonTable))>= numRobots){
 	#	Debug.print("DONE")
 	#}
