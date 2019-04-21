@@ -13,25 +13,25 @@ function reset_led() {
 }
 
 function set_top_led() {
-	reset_led()
+	reset_led() # Reset the LEDs before changing them
 	set_led(12,255,255,255)
 }
 
 function set_led_half(start) {
-	reset_led()
-	if(id == 1){
-		log(start)
-	}
+	reset_led() # reset the LEDs before changing them
+
 	var counter = 0.0
 	
 	while (counter < 6.0) {
-
+		
+		# Set the GREEN LEDs
 		if ((counter + start) > 11.0) {
 			set_led((counter + start) - 12.0, 0, 255, 0)
 		} else {
 			set_led(counter + start, 0, 255, 0)
 		}
-
+	
+		# Set the RED LEDs
 		if ((counter + start + 6.0) > 11.0) {
 			set_led((counter + start) - 6.0, 255, 0, 0)
 		} else {
@@ -107,35 +107,43 @@ function read_proximity() {
 
 # determine_half()
 function determine_half(point) {
+	# Determine where to place the split in lights
+	
+	# The point to which the red side should face
 	x = point.x
  	y = point.y
+	
+	# Robot's current coordinates
 	a_pose = pose.position
 	our_x = a_pose.x
 	our_y = a_pose.y
-
-	#our_angle = -pose.orientation.yaw
 	our_angle = pose.orientation.yaw
-
+	
+	# Make angle 0 - 2pi
 	if (our_angle < 0.0) {
 		our_angle = our_angle + 2 * math.pi
 	}
 	
-		angle_to_point = math.atan(-our_y + y, -our_x + x)
+	# Calculate the angle from robot to facing point
+	angle_to_point = math.atan(-our_y + y, -our_x + x)
 
-	
+	# Make angle 0 - 2pi
 	if (angle_to_point < 0) {
 		angle_to_point = angle_to_point + 2 * math.pi
 	}
-
-	rel_angle = (angle_to_point - our_angle) 
-	return_ang = rel_angle + (math.pi / 2)
 	
+	# Calculate angle to face relative to robot coordinates
+	rel_angle = (angle_to_point - our_angle) 
+	return_ang = rel_angle + (math.pi / 2) # offset angle by 90deg
+	
+	# ensure angle will be between 0 - 2pi
 	if (return_ang < 0) {
 		return_ang = return_ang + 2 * math.pi
 	}
 	if (return_ang > 2 * math.pi) {
 		return_ang = return_ang - 2 * math.pi
 	}
+	# Set the leds, convert to a number between 0 - 11
 	set_led_half(return_ang * 1.90985)
 }
 
@@ -148,8 +156,9 @@ function init(){
 
 #state maching
 function step() {
-	point2 = {.x = 3.0, .y = 0.0}
-	reset_led()
+
+	# the point where all the robots face their red side
+	point2 = {.x = 2.0, .y = 2.0}
 
 	determine_half(point2)
 	#debug.print(Count, ":", State)
