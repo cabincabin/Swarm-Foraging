@@ -28,6 +28,7 @@
         <colored_blob_omnidirectional_camera implementation="rot_z_only"
                                      medium="leds" show_rays="true" />
         <footbot_proximity implementation="default" show_rays="false" />
+        <positioning implementation="default"/>
       </sensors>
       <params>
         <wheel_turning hard_turn_angle_threshold="90"
