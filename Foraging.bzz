@@ -19,23 +19,27 @@ function set_top_led() {
 
 function set_led_half(start) {
 	reset_led() # reset the LEDs before changing them
-
+	LEDVals = {}
 	var counter = 0.0
 	
 	while (counter < 6.0) {
 		
 		# Set the GREEN LEDs
 		if ((counter + start) > 11.0) {
-			set_led((counter + start) - 12.0, 0, 255, 0)
+			set_led(math.ceil((counter + start) - 12.0), 0, 255, 0)
+			LEDVals[math.ceil((counter + start) - 12.0)] = "g" 
 		} else {
-			set_led(counter + start, 0, 255, 0)
+			set_led(math.ceil(counter + start), 0, 255, 0)
+			LEDVals[math.ceil(counter + start)] = "g"
 		}
 	
 		# Set the RED LEDs
 		if ((counter + start + 6.0) > 11.0) {
-			set_led((counter + start) - 6.0, 255, 0, 0)
+			set_led(math.ceil((counter + start) - 6.0), 255, 0, 0)
+			LEDVals[math.ceil((counter + start) - 6.0)] = "R"
 		} else {
-			set_led(counter + start + 6.0, 255, 0, 0)
+			set_led(math.ceil(counter + start + 6.0), 255, 0, 0)
+			LEDVals[math.ceil(counter + start + 6.0)] = "R"
 		}
 
 		counter = counter + 1.0
