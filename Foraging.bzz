@@ -215,9 +215,9 @@ function init(){
 
 #state maching
 function step() {
-
+	#log(id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
 	# the point where all the robots face their red side
-	point2 = {.x = 2.0, .y = 2.0}
+	point2 = {.x = 0.0, .y = 0.0}
 
 	determine_half(point2)
 	#debug.print(Count, ":", State)
