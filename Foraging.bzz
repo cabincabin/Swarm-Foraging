@@ -127,10 +127,10 @@ function SumBlobsMoveInForce(Thresh, xInit){
 		}
 		else{
 			if(turnAng > pi){
-				set_wheels(-1.0, 1.0)
+				set_wheels(-2.0, 2.0)
 			}
 			else{
-				set_wheels(-1.0, 1.0)
+				set_wheels(2.0, -2.0)
 			}
 		}
 	}
@@ -167,7 +167,7 @@ function obstacle_avoidance() {
 			# log("Wheel Speed X: ", x)
 			# log("Wheel Speed Y: ", y)
 			# Go to point that is opposite side from obstacle
-			gotoc(x / 2, y / 2)
+			gotoc(x*10 / 2, y*10 / 2)
 			#gotop(1,  
 		}
 }
@@ -223,7 +223,7 @@ function step() {
 	#debug.print(Count, ":", State)
 	#another_counter = another_counter + 1
 	#set_led_half(another_counter % 12)
-	SumBlobsMoveInForce(15, 1)
+	SumBlobsMoveInForce(15, 0)
 
 	#if(size(v.get(DonTable))>= numRobots){
 	#	Debug.print("DONE")
