@@ -1,8 +1,8 @@
 # Swarm Final Project
 
-numRobots = 20
-DoneTable = 1
-var another_counter = 0
+# numRobots = 20
+# DoneTable = 1
+# var another_counter = 0
 
 #-------------------LED STUFF--------------------------#
 
@@ -15,27 +15,22 @@ function reset_led() {
 	}
 }
 
-function set_top_led() {
-	reset_led() # Reset the LEDs before changing them
-	set_led(12,255,255,255)
-}
-
 function set_led_half(start) {
 	reset_led() # reset the LEDs before changing them
 	LEDVals = {}
 	var counter = 0.0
-	
+
 	while (counter < 6.0) {
-		
+
 		# Set the GREEN LEDs
 		if ((counter + start) > 11.0) {
 			set_led(math.ceil((counter + start) - 12.0), 0, 255, 0)
-			LEDVals[math.ceil((counter + start) - 12.0)] = "g" 
+			LEDVals[math.ceil((counter + start) - 12.0)] = "g"
 		} else {
 			set_led(math.ceil(counter + start), 0, 255, 0)
 			LEDVals[math.ceil(counter + start)] = "g"
 		}
-	
+
 		# Set the RED LEDs
 		if ((counter + start + 6.0) > 11.0) {
 			set_led(math.ceil((counter + start) - 6.0), 255, 0, 0)
@@ -46,30 +41,29 @@ function set_led_half(start) {
 		}
 
 		counter = counter + 1.0
-	} 
+	}
 }
 
 
 # determine_half()
 function determine_half(point) {
-	#log(id, " updating LEDs")
 	# Determine where to place the split in lights
-	
+
 	# The point to which the red side should face
 	x = point.x
  	y = point.y
-	
+
 	# Robot's current coordinates
 	a_pose = pose.position
 	our_x = a_pose.x
 	our_y = a_pose.y
 	our_angle = pose.orientation.yaw
-	
+
 	# Make angle 0 - 2pi
 	if (our_angle < 0.0) {
 		our_angle = our_angle + 2 * math.pi
 	}
-	
+
 	# Calculate the angle from robot to facing point
 	angle_to_point = math.atan(-our_y + y, -our_x + x)
 
@@ -77,11 +71,11 @@ function determine_half(point) {
 	if (angle_to_point < 0) {
 		angle_to_point = angle_to_point + 2 * math.pi
 	}
-	
+
 	# Calculate angle to face relative to robot coordinates
-	rel_angle = (angle_to_point - our_angle) 
+	rel_angle = (angle_to_point - our_angle)
 	return_ang = rel_angle + (math.pi / 2) # offset angle by 90deg
-	
+
 	# ensure angle will be between 0 - 2pi
 	if (return_ang < 0) {
 		return_ang = return_ang + 2 * math.pi
@@ -145,13 +139,12 @@ function SumBlobsMoveInForce(Thresh, yInit){
 
 function obstacle_avoidance() {
 	var magnitude = 5.0
-	#log("Obstacle avoiding")
 	var problem = read_proximity().problem_a
-	#log(problem)
+
 	# Decide whether to turn left or right
 	x = magnitude * math.cos(math.pi + problem)
 	y = magnitude * math.sin(math.pi + problem)
-	
+
 	# If angle is behind robot, nothing is detected
 	if (problem == -math.pi) {
 		# Nothing is detected
@@ -168,11 +161,8 @@ function obstacle_avoidance() {
 			y = 0
 		}
 
-		# log("Wheel Speed X: ", x)
-		# log("Wheel Speed Y: ", y)
 		# Go to point that is opposite side from obstacle
 		gotoc(x / 2, y / 2)
-		#gotop(1,
 	}
 }
 
@@ -184,22 +174,20 @@ function read_proximity() {
 
 	# Iterate through all the proximity sensors, find detections
 	var counter = 0
-	
+
 	var max_reading = 0.0
 	var problem_angle = -math.pi
 
-	while (counter < 23 and (loop_counter < 3 or loop_counter > 21)) {
+	while (counter < 24 and (loop_counter < 3 or loop_counter > 21)) {
 		var frontValue = proximity[counter].value
 		var frontAngle = proximity[counter].angle
 		if (frontValue > max_reading) {
 			max_reading = frontValue
 			problem_angle = frontAngle # log the problem angle
-			#log("Obstacle detected in front of Sensor: ", counter)
-			#log("Reading: ", max_reading, " Angle: ", frontAngle)
 		}
 		counter = counter + 1
 	}
-	
+
 	# Setup the return table
 	t = { .max_r = max_reading, .problem_a = problem_angle}
 	return t
@@ -234,8 +222,6 @@ function at_food() {
 }
 
 
-
-
 #-----------------DEFAULT FUNCTIONS-------------------#
 
 
@@ -243,9 +229,6 @@ function at_food() {
 function init(){
 	camera_enable()
 	found_food = 0
-
-	#v = stigmergy.create(DoneTable)
-	#v.put(DoneTable, {})
 }
 
 #state maching
@@ -262,31 +245,23 @@ function step() {
 		point2 = {.x = -1.75, .y =1.75}
 		found_food = 1
 		log(id,"-","1")
-		#log("food found at: (",food_loc.x,", ",food_loc.y,")")
 	}
 	#if we have found food at one point, update our lights to point to the food
 	else if(found_food == 1){
 		determine_half(point2)
 		random_walk()
-		#debug.print(point2.x, point2.y, "YOOO")
 	}
 	else{
 		SumBlobsMoveInForce(50, 0.01)
 	}
 
-	#debug.print(Count, ":", State)
-	#another_counter = another_counter + 1
-	#set_led_half(another_counter % 12)
-	
-    #SumBlobsMoveInForce(15, 0)
-	#if(size(v.get(DonTable))>= numRobots){
-	#	Debug.print("DONE")
-	#}
+
 #__________________________________#
 }
 
 function reset(){
 }
+
 # Execute at exit
 function destroy() {
 }
