@@ -101,33 +101,23 @@ function random_walk() {
 #xInit: how much we want to prioritize going in the direction it's already going
 function SumBlobsMoveInForce(Thresh, yInit){
 	if(size(blobs) > 0){
-		forceX = 0
-		forceY = yInit
+		forceX = yInit
+		forceY = 0
 		foreach(blobs, function(key, value) {
 				dir = 1
  	     if(value['color']['red'] == 255){
-					dir = -1
+					dir = -1.0
 				}
 				forceX = forceX + dir*math.cos(value.angle)/value.distance
 				forceY = forceY + dir*math.sin(value.angle)/value.distance
 	    })
-
+		debug.rays.add(255,0,0, forceX * 5, forceY * 5,0.0)
 		turnAng = math.atan(forceY,forceX)
-		if(turnAng < 0){
-			turnAng = 2*math.pi + turnAng
-		}
+
 		debug.print(turnAng)
-		if(turnAng > 2*math.pi - math.pi/Thresh or turnAng < math.pi/Thresh){
-				random_walk()
-		}
-		else{
-			if(turnAng > math.pi){
-				set_wheels(5.0, -5.0)
-			}
-			else{
-				set_wheels(-5.0, 5.0)
-			}
-		}
+		
+		var turnMag = 4.0 # How far to place the temporary destination point
+		gotop(turnMag, turnAng / 4.0)
 	}
 	else{
  		random_walk()
@@ -166,6 +156,34 @@ function obstacle_avoidance() {
 	}
 }
 
+function obstacle_avoidance_blob() {
+	var magnitude = 5.0
+	var problem = read_proximity().problem_a
+
+	# Decide whether to turn left or right
+	x = magnitude * math.cos(math.pi + problem)
+	y = magnitude * math.sin(math.pi + problem)
+
+	# If angle is behind robot, nothing is detected
+	if (problem == -math.pi) {
+		# Nothing is detected
+		SumBlobsMoveInForce(50, 0.01)
+	}	 else {
+
+		# Something is detected
+		#	Isolate near 0 cases to avoid errors
+		if (x < 0.000001 and x > -0.000001){
+			x = 0
+		}
+
+		if (y < 0.000001 and y > -0.000001){
+			y = 0
+		}
+
+		# Go to point that is opposite side from obstacle
+		gotoc(x / 2, y / 2)
+	}
+}
 
 #----------------------_SENSOR READING-------------------_#
 
@@ -227,6 +245,7 @@ function at_food() {
 
 # Initialization
 function init(){
+	
 	camera_enable()
 	found_food = 0
 }
@@ -237,11 +256,11 @@ function step() {
 	#if we found the food, remember that we did and remember where we found it
 	if((found_food == 0) and at_food()){
 		a_pose = pose.position
-
+		
 		#point2 = {.x = a_pose.x, .y = a_pose.y}
 		var num = a_pose.x
 		var num2 = a_pose.y
-
+		debug.rays.add(255,0,0, -num * 5, -num2 * 5,0.0)
 		point2 = {.x = -1.75, .y =1.75}
 		found_food = 1
 		log(id,"-","1")
@@ -252,7 +271,7 @@ function step() {
 		random_walk()
 	}
 	else{
-		SumBlobsMoveInForce(50, 0.01)
+		obstacle_avoidance_blob()
 	}
 
 

@@ -85,7 +85,7 @@
       <position method="uniform" min="-4,-4,0" max="4,4,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
       <entity quantity="40" max_trials="100">
-        <foot-bot id="fb" omnidirectional_camera_aperture="88">
+        <foot-bot id="fb" omnidirectional_camera_aperture="70">
           <controller config="shape_formation" />
         </foot-bot>
       </entity>
@@ -109,11 +109,26 @@
     <led id="light" />
   </media>
 
+
   <!-- ****************** -->
   <!-- * Visualization * -->
   <!-- ****************** -->
   <visualization>
     <qt-opengl>
+      <camera>
+         <placement idx="0" position="0.00,0.0,6.5" look_at="0.0,0.0,0.0" up="0.999998,0.00203669,1.04083e-17" lens_focal_length="20" />
+         <placement idx="1" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+         <placement idx="2" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+         <placement idx="3" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+         <placement idx="4" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+         <placement idx="5" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+         <placement idx="6" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+         <placement idx="7" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+         <placement idx="8" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+         <placement idx="9" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+         <placement idx="10" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+         <placement idx="11" position="-2,0,2" look_at="0,0,0" up="0.707107,0,0.707107" lens_focal_length="20" />
+      </camera>
       <user_functions label="buzz_qt" />
     </qt-opengl>
   </visualization>
