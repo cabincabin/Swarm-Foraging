@@ -79,7 +79,9 @@ function determine_half(point) {
 	}
 	
 	# Calculate angle to face relative to robot coordinates
-	rel_angle = (angle_to_point - our_angle) 
+	rel_angle = (angle_to_point - our_angle)
+	#debug.rays.add(255,0,0, (math.cos(rel_angle)+math.pi/2)* 5,  (math.sin(rel_angle)+math.pi/2) * 5,0.0) 
+	#debug.rays.add(255,0,0, -math.cos(relAng)* 5,  -math.sin(relAng) * 5,0.0) 
 	return_ang = rel_angle + (math.pi / 2) # offset angle by 90deg
 	
 	# ensure angle will be between 0 - 2pi
@@ -112,12 +114,13 @@ function SumBlobsMoveInForce(Thresh, yInit){
 		foreach(blobs, function(key, value) {
 				dir = 1
  	     if(value['color']['red'] == 255){
-					dir = -0.02
+					dir = -1
 				}
 				forceX = forceX + dir*math.cos(value.angle)/value.distance
 				forceY = forceY + dir*math.sin(value.angle)/value.distance
-	    })
 
+	    })
+		debug.rays.add(0,0,255, forceX * 5, forceY * 5,0.0)
 		turnAng = math.atan(forceY,forceX)
 		if(turnAng < 0){
 			turnAng = 2*math.pi + turnAng
@@ -250,31 +253,33 @@ function init(){
 
 #state maching
 function step() {
-    #log(id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
+	point2 = {.x = 2.0, .y =2.0}
+
+  log("[=",count,"]: ", id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
 	#if we found the food, remember that we did and remember where we found it
-	if((found_food == 0) and at_food()){
-		a_pose = pose.position
+	#if((found_food == 0) and at_food()){
+		#a_pose = pose.position
 
 		#point2 = {.x = a_pose.x, .y = a_pose.y}
-		var num = a_pose.x
-		var num2 = a_pose.y
+		#var num = a_pose.x
+		#var num2 = a_pose.y
 
-		point2 = {.x = -1.75, .y =1.75}
-		found_food = 1
+		
+		#found_food = 1
 		#set_top_led()
-		log("[=",count,"] ", id,"-","1")
+		#log("[=",count,"] ", id,"-","1")
 		#log("food found at: (",food_loc.x,", ",food_loc.y,")")
-	}
+	#}
 	#if we have found food at one point, update our lights to point to the food
-	else if(found_food == 1){
+	#else if(found_food == 1){
 		determine_half(point2)
-		random_walk()
+		#random_walk()
 		#debug.print(point2.x, point2.y, "YOOO")
-	}
-	else{
+	#}
+	#else{
 		#andom_walk()
-		SumBlobsMoveInForce(50, 0.05)
-	}
+		SumBlobsMoveInForce(15, 0)
+	#}
 	count = count + 1
 	#debug.print(Count, ":", State)
 	#another_counter = another_counter + 1
