@@ -210,23 +210,28 @@ function init(){
 #state maching
 function step() {
 	#if we found the food, remember that we did and remember where we found it
-	if((not found_food) and at_food()){
+	if((found_food == 0) and at_food()){
 		a_pose = pose.position
 
-		food_loc = {.x = a_pose.x, .y = a_pose.y}
+		#point2 = {.x = a_pose.x, .y = a_pose.y}
+		var num = a_pose.x
+		var num2 = a_pose.y
+	
+		point2 = {.x = num, .y = num2}
 		found_food = 1
-		log("food found at: (",food_loc.x,", ",food_loc.y,")")
+		#log("food found at: (",food_loc.x,", ",food_loc.y,")")
 	}
 	#if we have found food at one point, update our lights to point to the food
-	if(found_food == 1){
-		determine_half(food_loc)
+	else if(found_food == 1){
+		determine_half(point2)
+		debug.print(point2.x, point2.y, "YOOO")
 	}
 	
 	#debug.print(Count, ":", State)
 	#another_counter = another_counter + 1
 	#set_led_half(another_counter % 12)
 	random_walk()
-	debug.print(found_food)
+	#debug.print(found_food)
 	#if(size(v.get(DonTable))>= numRobots){
 	#	Debug.print("DONE")
 	#}
