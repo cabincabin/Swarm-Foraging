@@ -52,7 +52,7 @@ function set_led_half(start) {
 
 # determine_half()
 function determine_half(point) {
-	log(id, " updating LEDs")
+	# log(id, " updating LEDs")
 	# Determine where to place the split in lights
 	
 	# The point to which the red side should face
@@ -118,22 +118,12 @@ function SumBlobsMoveInForce(Thresh, yInit){
 				forceY = forceY + dir*math.sin(value.angle)/value.distance
 	    })
 
-		turnAng = math.atan(forceX,forceY)
-		if(turnAng < 0){
-			turnAng = 2*math.pi + turnAng
-		}
+		turnAng = math.atan(forceY,forceX)
+	
 		debug.print(turnAng)
-		if(turnAng > 2*math.pi - math.pi/Thresh or turnAng < math.pi/Thresh){
-				random_walk()
-		}
-		else{
-			if(turnAng > pi){
-				set_wheels(-2.0, 2.0)
-			}
-			else{
-				set_wheels(2.0, -2.0)
-			}
-		}
+		var turnMag = 3.0 # How far to place the temporary destination point
+		gotop(turnMag, turnAng / 3.0)
+
 	}
 	else{
  		random_walk()
@@ -250,7 +240,7 @@ function init(){
 
 #state maching
 function step() {
-    log(id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
+    #log(id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
 	#if we found the food, remember that we did and remember where we found it
 	if((found_food == 0) and at_food()){
 		a_pose = pose.position
@@ -270,7 +260,7 @@ function step() {
 		#debug.print(point2.x, point2.y, "YOOO")
 	}
 	else{
-		SumBlobsMoveInForce(15, 20)
+		SumBlobsMoveInForce(15, 0)
 	}
 
 	#debug.print(Count, ":", State)
