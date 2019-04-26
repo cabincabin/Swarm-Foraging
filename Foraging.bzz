@@ -102,6 +102,44 @@ function random_walk() {
 	obstacle_avoidance()
 }
 
+
+#THRESH:the threshold for the force sum, how accurately do we have to be at the force sum
+#xInit: how much we want to prioritize going in the direction it's already going
+function SumBlobsMoveInForce(Thresh, xInit){
+	if(size(blobs) > 0){
+		forceX = xInit
+		forceY = 0
+		foreach(blobs, function(key, value) {
+				dir = 1
+ 	     if(value['color']['red'] == 255){
+					dir = -1
+				}
+				forceX = forceX + dir*math.cos(value.angle)/value.distance
+				forceY = forceY + dir*math.sin(value.angle)/value.distance
+	    })
+
+		turnAng = math.atan(forceX,forceY)
+		if(turnAng < 0){
+			turnAng = 2*math.pi + turnAng
+		}
+		debug.print(turnAng)
+		if(turnAng > 2*math.pi - math.pi/Thresh or turnAng < math.pi/Thresh){
+				random_walk()
+		}
+		else{
+			if(turnAng > pi){
+				set_wheels(-2.0, 2.0)
+			}
+			else{
+				set_wheels(2.0, -2.0)
+			}
+		}
+	}
+
+
+}
+
+
 function obstacle_avoidance() {
 	var magnitude = 5.0
 	#log("Obstacle avoiding")
@@ -116,7 +154,7 @@ function obstacle_avoidance() {
 		# Nothing is detected
 		set_wheels(magnitude, magnitude)
 	}	 else {
-	
+
 		# Something is detected
 		#	Isolate near 0 cases to avoid errors
 		if (x < 0.000001 and x > -0.000001){
@@ -131,7 +169,7 @@ function obstacle_avoidance() {
 		# log("Wheel Speed Y: ", y)
 		# Go to point that is opposite side from obstacle
 		gotoc(x / 2, y / 2)
-		#gotop(1,  
+		#gotop(1,
 	}
 }
 
@@ -167,7 +205,7 @@ function read_proximity() {
 # at_food()
 # return True (1) if at the food
 # return False (0) if not at the food
-function at_food() {	
+function at_food() {
 	var food_threshold = 0.80 # Threshold compared to light reading to determine if at food
 	var loop_counter2 = 0
 	var max_reading = 0;
@@ -177,19 +215,19 @@ function at_food() {
 		light_obj = light[loop_counter2]
 		light_reading = light_obj['value']
 		light_angle = light_obj['angle']
-	
+
 		if (max_reading < light_reading) {
 			max_reading = light_reading
 			max_angle = light_angle
 		}
 		loop_counter2 = loop_counter2 + 1
 	}
-	
+
 	if (max_reading > food_threshold) {
 		return 1
 	}	else {
 		return 0
-	}	
+	}
 }
 
 
@@ -202,13 +240,14 @@ function at_food() {
 function init(){
 	camera_enable()
 	found_food = 0
-	
-	#v = stigmergy.create(DoneTable) 
+
+	#v = stigmergy.create(DoneTable)
 	#v.put(DoneTable, {})
 }
 
 #state maching
 function step() {
+    log(id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
 	#if we found the food, remember that we did and remember where we found it
 	if((found_food == 0) and at_food()){
 		a_pose = pose.position
@@ -216,7 +255,7 @@ function step() {
 		#point2 = {.x = a_pose.x, .y = a_pose.y}
 		var num = a_pose.x
 		var num2 = a_pose.y
-	
+
 		point2 = {.x = num, .y = num2}
 		found_food = 1
 		#log("food found at: (",food_loc.x,", ",food_loc.y,")")
@@ -226,12 +265,12 @@ function step() {
 		determine_half(point2)
 		debug.print(point2.x, point2.y, "YOOO")
 	}
-	
+
 	#debug.print(Count, ":", State)
 	#another_counter = another_counter + 1
 	#set_led_half(another_counter % 12)
 	random_walk()
-	#debug.print(found_food)
+    #SumBlobsMoveInForce(15, 0)
 	#if(size(v.get(DonTable))>= numRobots){
 	#	Debug.print("DONE")
 	#}
