@@ -113,8 +113,8 @@ function SumBlobsMoveInForce(Thresh, xInit){
  	     if(value['color']['red'] == 255){
 					dir = -1
 				}
-				forceX = forceX + dir*math.cos(value.angle)
-				forceY = forceY + dir*math.sin(value.angle)
+				forceX = forceX + dir*math.cos(value.angle)/value.distance
+				forceY = forceY + dir*math.sin(value.angle)/value.distance
 	    })
 
 		turnAng = math.atan(forceX,forceY)
@@ -215,7 +215,7 @@ function init(){
 
 #state maching
 function step() {
-	#log(id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
+	log(id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
 	# the point where all the robots face their red side
 	point2 = {.x = 0.0, .y = 0.0}
 
