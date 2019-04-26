@@ -105,10 +105,10 @@ function random_walk() {
 
 #THRESH:the threshold for the force sum, how accurately do we have to be at the force sum
 #xInit: how much we want to prioritize going in the direction it's already going
-function SumBlobsMoveInForce(Thresh, xInit){
+function SumBlobsMoveInForce(Thresh, yInit){
 	if(size(blobs) > 0){
-		forceX = xInit
-		forceY = 0
+		forceX = 0
+		forceY = yInit
 		foreach(blobs, function(key, value) {
 				dir = 1
  	     if(value['color']['red'] == 255){
@@ -270,7 +270,7 @@ function step() {
 		#debug.print(point2.x, point2.y, "YOOO")
 	}
 	else{
-		SumBlobsMoveInForce(15, 5)
+		SumBlobsMoveInForce(15, 20)
 	}
 
 	#debug.print(Count, ":", State)
