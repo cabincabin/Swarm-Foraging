@@ -1,5 +1,5 @@
 # Swarm Final Project
-
+count = 0
 numRobots = 20
 DoneTable = 1
 var another_counter = 0
@@ -107,12 +107,12 @@ function random_walk() {
 #xInit: how much we want to prioritize going in the direction it's already going
 function SumBlobsMoveInForce(Thresh, yInit){
 	if(size(blobs) > 0){
-		forceX = 0
-		forceY = yInit
+		forceX = yInit
+		forceY = 0
 		foreach(blobs, function(key, value) {
 				dir = 1
  	     if(value['color']['red'] == 255){
-					dir = -1
+					dir = -0.02
 				}
 				forceX = forceX + dir*math.cos(value.angle)/value.distance
 				forceY = forceY + dir*math.sin(value.angle)/value.distance
@@ -243,7 +243,7 @@ function at_food() {
 function init(){
 	camera_enable()
 	found_food = 0
-
+	count = 0
 	#v = stigmergy.create(DoneTable)
 	#v.put(DoneTable, {})
 }
@@ -261,7 +261,8 @@ function step() {
 
 		point2 = {.x = -1.75, .y =1.75}
 		found_food = 1
-		log(id,"-","1")
+		#set_top_led()
+		log("[=",count,"] ", id,"-","1")
 		#log("food found at: (",food_loc.x,", ",food_loc.y,")")
 	}
 	#if we have found food at one point, update our lights to point to the food
@@ -271,9 +272,10 @@ function step() {
 		#debug.print(point2.x, point2.y, "YOOO")
 	}
 	else{
-		SumBlobsMoveInForce(50, 0.01)
+		#andom_walk()
+		SumBlobsMoveInForce(50, 0.05)
 	}
-
+	count = count + 1
 	#debug.print(Count, ":", State)
 	#another_counter = another_counter + 1
 	#set_led_half(another_counter % 12)

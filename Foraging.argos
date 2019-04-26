@@ -8,7 +8,7 @@
     <system threads="40" />
     <experiment length="0"
                 ticks_per_second="10"
-                random_seed="123" />
+                random_seed="12" />
   </framework>
 
   <!-- *************** -->
@@ -17,6 +17,7 @@
   <controllers>
 
     <buzz_controller_footbot id="shape_formation">
+         <params bytecode_file="Foraging.bo" debug_file="Foraging.bdb" />
       <actuators>
         <differential_steering implementation="default" />
         <range_and_bearing     implementation="default" />
@@ -112,6 +113,7 @@
   <!-- ****************** -->
   <!-- * Visualization * -->
   <!-- ****************** -->
+
   <visualization>
     <qt-opengl>
       <user_functions label="buzz_qt" />
