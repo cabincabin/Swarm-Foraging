@@ -5,7 +5,7 @@
 # var another_counter = 0
 
 #-------------------LED STUFF--------------------------#
-
+count = 0
 
 function reset_led() {
 	var counter = 0
@@ -106,7 +106,7 @@ function SumBlobsMoveInForce(Thresh, yInit){
 		foreach(blobs, function(key, value) {
 				dir = 1
  	     if(value['color']['red'] == 255){
-					dir = -1
+					dir = 0
 				}
 				forceX = forceX + dir*math.cos(value.angle)/value.distance
 				forceY = forceY + dir*math.sin(value.angle)/value.distance
@@ -244,7 +244,7 @@ function step() {
 
 		point2 = {.x = -1.75, .y =1.75}
 		found_food = 1
-		log(id,"-","1")
+		log("[=",count,"]: ",id,"-","1")
 	}
 	#if we have found food at one point, update our lights to point to the food
 	else if(found_food == 1){
@@ -252,10 +252,10 @@ function step() {
 		random_walk()
 	}
 	else{
-		SumBlobsMoveInForce(50, 0.01)
+		SumBlobsMoveInForce(50, 0)
+
 	}
-
-
+count = count+1
 #__________________________________#
 }
 

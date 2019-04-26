@@ -1,0 +1,59 @@
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_eyebot.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_qtopengl.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_entities.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_pointmass3d.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_footbot.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_epuck.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_dynamics3d.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_dynamics2d.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3core_simulator.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_buzz.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_genericrobot.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_media.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_kilobot.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_kheperaiv.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_prototype.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_spiri.so[0m[1;32m"[0m
+[1;32m[INFO] Using [0m[1;32m40[0m[1;32m parallel threads[0m
+[1;32m[INFO]   Chosen method "balance_quantity": threads will be assigned the same[0m
+[1;32m[INFO]   number of tasks, independently of the task length.[0m
+[1;32m[INFO] Using random seed = [0m[1;32m438092[0m
+[1;32m[INFO] Using simulation clock tick = [0m[1;32m0.1[0m
+[1;32m[INFO] Total experiment length in clock ticks = [0m[1;32munlimited[0m
+[1;32m[INFO] The physics engine "[0m[1;32mdyn2d[0m[1;32m" will perform [0m[1;32m10[0m[1;32m iterations per tick (dt = [0m[1;32m0.01[0m[1;32m sec)[0m
+[1;32m[INFO] No visualization selected.[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m6[0m[1;32m]: [0m[1;32m16[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m71[0m[1;32m]: [0m[1;32m7[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m75[0m[1;32m]: [0m[1;32m27[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m134[0m[1;32m]: [0m[1;32m11[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m164[0m[1;32m]: [0m[1;32m12[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m173[0m[1;32m]: [0m[1;32m25[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m212[0m[1;32m]: [0m[1;32m0[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m275[0m[1;32m]: [0m[1;32m9[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m276[0m[1;32m]: [0m[1;32m33[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m522[0m[1;32m]: [0m[1;32m37[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m544[0m[1;32m]: [0m[1;32m4[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m583[0m[1;32m]: [0m[1;32m39[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m588[0m[1;32m]: [0m[1;32m5[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m588[0m[1;32m]: [0m[1;32m26[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m623[0m[1;32m]: [0m[1;32m22[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m677[0m[1;32m]: [0m[1;32m34[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m711[0m[1;32m]: [0m[1;32m19[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m770[0m[1;32m]: [0m[1;32m32[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m791[0m[1;32m]: [0m[1;32m23[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m800[0m[1;32m]: [0m[1;32m29[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m854[0m[1;32m]: [0m[1;32m6[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m912[0m[1;32m]: [0m[1;32m14[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m964[0m[1;32m]: [0m[1;32m3[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m965[0m[1;32m]: [0m[1;32m28[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m970[0m[1;32m]: [0m[1;32m35[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m1023[0m[1;32m]: [0m[1;32m13[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m1047[0m[1;32m]: [0m[1;32m15[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m1062[0m[1;32m]: [0m[1;32m2[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m1160[0m[1;32m]: [0m[1;32m20[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m1209[0m[1;32m]: [0m[1;32m30[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m1253[0m[1;32m]: [0m[1;32m31[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m1293[0m[1;32m]: [0m[1;32m8[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m1368[0m[1;32m]: [0m[1;32m21[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m1430[0m[1;32m]: [0m[1;32m18[0m[1;32m-[0m[1;32m1[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m1478[0m[1;32m]: [0m[1;32m10[0m[1;32m-[0m[1;32m1[0m
