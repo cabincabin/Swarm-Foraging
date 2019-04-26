@@ -1,0 +1,25 @@
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_eyebot.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_qtopengl.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_entities.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_pointmass3d.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_footbot.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_epuck.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_dynamics3d.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_dynamics2d.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3core_simulator.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_buzz.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_genericrobot.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_media.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_kilobot.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_kheperaiv.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_prototype.so[0m[1;32m"[0m
+[1;32m[INFO] Loaded library "[0m[1;32m/usr/local/lib/argos3/libargos3plugin_simulator_spiri.so[0m[1;32m"[0m
+[1;32m[INFO] Using [0m[1;32m40[0m[1;32m parallel threads[0m
+[1;32m[INFO]   Chosen method "balance_quantity": threads will be assigned the same[0m
+[1;32m[INFO]   number of tasks, independently of the task length.[0m
+[1;32m[INFO] Using random seed = [0m[1;32m840547[0m
+[1;32m[INFO] Using simulation clock tick = [0m[1;32m0.1[0m
+[1;32m[INFO] Total experiment length in clock ticks = [0m[1;32munlimited[0m
+[1;32m[INFO] The physics engine "[0m[1;32mdyn2d[0m[1;32m" will perform [0m[1;32m10[0m[1;32m iterations per tick (dt = [0m[1;32m0.01[0m[1;32m sec)[0m
+[1;32m[INFO] No visualization selected.[0m
+[1;32mBUZZ: [0m[1;32m[=[0m[1;32m0[0m[1;32m]: [0m[1;32m9[0m[1;32m-[0m[1;32m1[0m
