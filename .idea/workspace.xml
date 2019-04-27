@@ -2,35 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="027dca32-1dc1-4fe9-b8f4-645e2d6d2f75" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/TolkenizeAndProcessDataFoodFind.py" />
-      <change beforePath="$PROJECT_DIR$/.idea/Swarm-Foraging.iml" afterPath="$PROJECT_DIR$/.idea/Swarm-Foraging.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_1.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_1.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_10.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_10.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_11.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_11.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_12.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_12.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_13.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_13.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_14.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_14.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_15.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_15.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_16.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_16.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_17.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_17.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_18.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_18.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_19.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_19.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_2.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_2.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_20.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_20.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_21.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_21.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_22.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_22.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_23.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_23.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_24.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_24.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_25.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_25.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_3.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_3.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_4.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_4.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_5.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_5.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_6.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_6.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_7.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_7.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_8.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_8.txt" />
-      <change beforePath="$PROJECT_DIR$/Green1Red0_9.txt" afterPath="$PROJECT_DIR$/GreenOnly/Green1Red0_9.txt" />
+      <change beforePath="$PROJECT_DIR$/TolkenizeAndProcessDataFoodFind.py" afterPath="$PROJECT_DIR$/TolkenizeAndProcessDataFoodFind.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Swarm_Foraging$TolkenizeAndProcessDataFoodFind.coverage" NAME="TolkenizeAndProcessDataFoodFind Coverage Results" MODIFIED="1556386500129" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Swarm_Foraging$TolkenizeAndProcessDataFoodFind.coverage" NAME="TolkenizeAndProcessDataFoodFind Coverage Results" MODIFIED="1556387435918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Swarm_Foraging$TolkenizeAndProcessDataDist.coverage" NAME="TolkenizeAndProcessDataDist Coverage Results" MODIFIED="1555961809205" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
@@ -128,8 +100,8 @@
       <file leaf-file-name="TolkenizeAndProcessDataFoodFind.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TolkenizeAndProcessDataFoodFind.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="24" column="35" lean-forward="true" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+            <state relative-caret-position="424">
+              <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -203,18 +175,6 @@
               <item name="Swarm-Foraging" type="462c0819:PsiDirectoryNode" />
               <item name="ApatureTests" type="462c0819:PsiDirectoryNode" />
               <item name="70" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swarm-Foraging" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swarm-Foraging" type="462c0819:PsiDirectoryNode" />
-              <item name="ApatureTests" type="462c0819:PsiDirectoryNode" />
-              <item name="70" type="462c0819:PsiDirectoryNode" />
-              <item name="GreenOnly" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Swarm-Foraging" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Swarm-Foraging" type="462c0819:PsiDirectoryNode" />
-              <item name="RedOnly" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -327,6 +287,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="1076" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -337,7 +298,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.187062" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="SciView" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.61832887" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16172507" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997955" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -709,8 +670,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TolkenizeAndProcessDataFoodFind.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="24" column="35" lean-forward="true" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+        <state relative-caret-position="424">
+          <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
