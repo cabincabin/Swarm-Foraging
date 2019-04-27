@@ -9,39 +9,37 @@
 
 function reset_led() {
 	var counter = 0
-	while (counter < 11){
+	while (counter <= 11){
+		set_led(counter, 0, 0, 0)
 		counter = counter + 1
-		set_led(0, 0, 0, 0)
 	}
 }
 
 function set_led_half(start) {
 	reset_led() # reset the LEDs before changing them
 	LEDVals = {}
-	var counter = 0.0
+	var counter = 3.0
 
-	while (counter < 6.0) {
 
+		
 		# Set the GREEN LEDs
-		if ((counter + start) > 11.0) {
-			set_led(math.ceil((counter + start) - 12.0), 0, 255, 0)
-			LEDVals[math.ceil((counter + start) - 12.0)] = "g"
+		if ((3.0 + start) > 11.0) {
+			set_led(math.ceil((3.0 + start) - 12.0), 0, 255, 0)
+			LEDVals[math.ceil((3.0 + start) - 12.0)] = "g"
 		} else {
-			set_led(math.ceil(counter + start), 0, 255, 0)
-			LEDVals[math.ceil(counter + start)] = "g"
+			set_led(math.ceil(3.0 + start), 0, 255, 0)
+			LEDVals[math.ceil(3.0 + start)] = "g"
 		}
 
 		# Set the RED LEDs
-		if ((counter + start + 6.0) > 11.0) {
-			set_led(math.ceil((counter + start) - 6.0), 255, 0, 0)
-			LEDVals[math.ceil((counter + start) - 6.0)] = "R"
+		if ((3.0 + start + 6.0) > 11.0) {
+			set_led(math.ceil((3.0 + start) - 6.0), 255, 0, 0)
+			LEDVals[math.ceil((3.0 + start) - 6.0)] = "R"
 		} else {
-			set_led(math.ceil(counter + start + 6.0), 255, 0, 0)
-			LEDVals[math.ceil(counter + start + 6.0)] = "R"
+			set_led(math.ceil(3.0 + start + 6.0), 255, 0, 0)
+			LEDVals[math.ceil(3.0 + start + 6.0)] = "R"
 		}
 
-		counter = counter + 1.0
-	}
 }
 
 
@@ -106,7 +104,7 @@ function SumBlobsMoveInForce(Thresh, yInit){
 		foreach(blobs, function(key, value) {
 				dir = 1
  	     if(value['color']['red'] == 255){
-					dir = -0.2
+					dir = -1
 				}
 				forceX = forceX + dir*math.cos(value.angle)/value.distance
 				forceY = forceY + dir*math.sin(value.angle)/value.distance
@@ -122,7 +120,6 @@ function SumBlobsMoveInForce(Thresh, yInit){
 	else{
  		random_walk()
 }
-
 
 }
 
