@@ -17,7 +17,7 @@
   <controllers>
 
     <buzz_controller_footbot id="shape_formation">
-         <!--<params bytecode_file="Foraging.bo" debug_file="Foraging.bdb" />-->
+         <params bytecode_file="Foraging.bo" debug_file="Foraging.bdb" />
       <actuators>
         <differential_steering implementation="default" />
         <range_and_bearing     implementation="default" />
@@ -114,10 +114,11 @@
   <!-- * Visualization * -->
   <!-- ****************** -->
 
+<!--
   <visualization>
     <qt-opengl>
       <user_functions label="buzz_qt" />
     </qt-opengl>
-  </visualization>
+  </visualization>-->
 
 </argos-configuration>
