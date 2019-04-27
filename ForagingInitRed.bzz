@@ -1,0 +1,267 @@
+# Swarm Final Project
+
+# numRobots = 20
+# DoneTable = 1
+# var another_counter = 0
+
+#-------------------LED STUFF--------------------------#
+count = 0
+
+function reset_led() {
+	var counter = 0
+	while (counter < 11){
+		counter = counter + 1
+		set_led(0, 0, 0, 0)
+	}
+}
+
+function set_led_half(start) {
+	reset_led() # reset the LEDs before changing them
+	LEDVals = {}
+	var counter = 0.0
+
+	while (counter < 6.0) {
+
+		# Set the GREEN LEDs
+		if ((counter + start) > 11.0) {
+			set_led(math.ceil((counter + start) - 12.0), 0, 255, 0)
+			LEDVals[math.ceil((counter + start) - 12.0)] = "g"
+		} else {
+			set_led(math.ceil(counter + start), 0, 255, 0)
+			LEDVals[math.ceil(counter + start)] = "g"
+		}
+
+		# Set the RED LEDs
+		if ((counter + start + 6.0) > 11.0) {
+			set_led(math.ceil((counter + start) - 6.0), 255, 0, 0)
+			LEDVals[math.ceil((counter + start) - 6.0)] = "R"
+		} else {
+			set_led(math.ceil(counter + start + 6.0), 255, 0, 0)
+			LEDVals[math.ceil(counter + start + 6.0)] = "R"
+		}
+
+		counter = counter + 1.0
+	}
+}
+
+
+# determine_half()
+function determine_half(point) {
+	# Determine where to place the split in lights
+
+	# The point to which the red side should face
+	x = point.x
+ 	y = point.y
+
+	# Robot's current coordinates
+	a_pose = pose.position
+	our_x = a_pose.x
+	our_y = a_pose.y
+	our_angle = pose.orientation.yaw
+
+	# Make angle 0 - 2pi
+	if (our_angle < 0.0) {
+		our_angle = our_angle + 2 * math.pi
+	}
+
+	# Calculate the angle from robot to facing point
+	angle_to_point = math.atan(-our_y + y, -our_x + x)
+
+	# Make angle 0 - 2pi
+	if (angle_to_point < 0) {
+		angle_to_point = angle_to_point + 2 * math.pi
+	}
+
+	# Calculate angle to face relative to robot coordinates
+	rel_angle = (angle_to_point - our_angle)
+	return_ang = rel_angle + (math.pi / 2) # offset angle by 90deg
+
+	# ensure angle will be between 0 - 2pi
+	if (return_ang < 0) {
+		return_ang = return_ang + 2 * math.pi
+	}
+	if (return_ang > 2 * math.pi) {
+		return_ang = return_ang - 2 * math.pi
+	}
+	# Set the leds, convert to a number between 0 - 11
+	set_led_half(return_ang * 1.90985)
+}
+
+
+#----------------------WALKING STUFF------------------------#
+
+
+# Call a specific random walk
+function random_walk() {
+	obstacle_avoidance()
+}
+
+
+#THRESH:the threshold for the force sum, how accurately do we have to be at the force sum
+#xInit: how much we want to prioritize going in the direction it's already going
+function SumBlobsMoveInForce(Thresh, yInit){
+	if(size(blobs) > 0){
+		forceX = 0
+		forceY = yInit
+		foreach(blobs, function(key, value) {
+				dir = 1
+ 	     if(value['color']['red'] == 255){
+					dir = 0
+				}
+				forceX = forceX + dir*math.cos(value.angle)/value.distance
+				forceY = forceY + dir*math.sin(value.angle)/value.distance
+	    })
+
+		turnAng = math.atan(forceY,forceX)
+		if(turnAng < 0){
+			turnAng = 2*math.pi + turnAng
+		}
+		debug.print(turnAng)
+		if(turnAng > 2*math.pi - math.pi/Thresh or turnAng < math.pi/Thresh){
+				random_walk()
+		}
+		else{
+			if(turnAng > math.pi){
+				set_wheels(5.0, -5.0)
+			}
+			else{
+				set_wheels(-5.0, 5.0)
+			}
+		}
+	}
+	else{
+ 		random_walk()
+}
+
+
+}
+
+
+function obstacle_avoidance() {
+	var magnitude = 5.0
+	var problem = read_proximity().problem_a
+
+	# Decide whether to turn left or right
+	x = magnitude * math.cos(math.pi + problem)
+	y = magnitude * math.sin(math.pi + problem)
+
+	# If angle is behind robot, nothing is detected
+	if (problem == -math.pi) {
+		# Nothing is detected
+		set_wheels(magnitude, magnitude)
+	}	 else {
+
+		# Something is detected
+		#	Isolate near 0 cases to avoid errors
+		if (x < 0.000001 and x > -0.000001){
+			x = 0
+		}
+
+		if (y < 0.000001 and y > -0.000001){
+			y = 0
+		}
+
+		# Go to point that is opposite side from obstacle
+		gotoc(x / 2, y / 2)
+	}
+}
+
+
+#----------------------_SENSOR READING-------------------_#
+
+
+function read_proximity() {
+
+	# Iterate through all the proximity sensors, find detections
+	var counter = 0
+
+	var max_reading = 0.0
+	var problem_angle = -math.pi
+
+	while (counter < 24 and (loop_counter < 3 or loop_counter > 21)) {
+		var frontValue = proximity[counter].value
+		var frontAngle = proximity[counter].angle
+		if (frontValue > max_reading) {
+			max_reading = frontValue
+			problem_angle = frontAngle # log the problem angle
+		}
+		counter = counter + 1
+	}
+
+	# Setup the return table
+	t = { .max_r = max_reading, .problem_a = problem_angle}
+	return t
+}
+
+# at_food()
+# return True (1) if at the food
+# return False (0) if not at the food
+function at_food() {
+	var food_threshold = 0.80 # Threshold compared to light reading to determine if at food
+	var loop_counter2 = 0
+	var max_reading = 0;
+	var max_angle = 0;
+
+	while (loop_counter2 < 24) {
+		light_obj = light[loop_counter2]
+		light_reading = light_obj['value']
+		light_angle = light_obj['angle']
+
+		if (max_reading < light_reading) {
+			max_reading = light_reading
+			max_angle = light_angle
+		}
+		loop_counter2 = loop_counter2 + 1
+	}
+
+	if (max_reading > food_threshold) {
+		return 1
+	}	else {
+		return 0
+	}
+}
+
+
+#-----------------DEFAULT FUNCTIONS-------------------#
+
+
+# Initialization
+function init(){
+	camera_enable()
+	found_food = 0
+}
+
+#state maching
+function step() {
+    #log(id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
+	#if we found the food, remember that we did and remember where we found it
+	if((found_food == 0) and at_food()){
+		a_pose = pose.position
+
+		#point2 = {.x = a_pose.x, .y = a_pose.y}
+		var num = a_pose.x
+		var num2 = a_pose.y
+
+		point2 = {.x = -1.75, .y =1.75}
+		found_food = 1
+		log("[=",count,"]: ",id,"-","1")
+	}
+	#if we have found food at one point, update our lights to point to the food
+	else if(found_food == 1){
+		determine_half(point2)
+		random_walk()
+	}
+	else{
+		SumBlobsMoveInForce(50, 0)
+
+	}
+count = count+1
+#__________________________________#
+}
+
+function reset(){
+}
+
+# Execute at exit
+function destroy() {
+}
