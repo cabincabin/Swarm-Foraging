@@ -116,8 +116,8 @@ function SumBlobsMoveInForce(Thresh, yInit){
 
 		debug.print(turnAng)
 		
-		var turnMag = 4.0 # How far to place the temporary destination point
-		gotop(turnMag, turnAng / 4.0)
+		var turnMag = 5.0 # How far to place the temporary destination point
+		gotop(turnMag, turnAng)
 	}
 	else{
  		random_walk()
@@ -271,7 +271,7 @@ function step() {
 		random_walk()
 	}
 	else{
-		obstacle_avoidance_blob()
+		SumBlobsMoveInForce(50, 0.01)
 	}
 
 
