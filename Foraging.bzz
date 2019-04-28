@@ -104,9 +104,9 @@ function SumBlobsMoveInForce(Thresh, yInit){
 		forceX = 0
 		forceY = yInit
 		foreach(blobs, function(key, value) {
-				dir = 1
+				dir = 0
  	     if(value['color']['red'] == 255){
-					dir = 0
+					dir = -1
 				}
 				forceX = forceX + dir*math.cos(value.angle)/value.distance
 				forceY = forceY + dir*math.sin(value.angle)/value.distance
