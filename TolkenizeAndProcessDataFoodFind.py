@@ -23,8 +23,13 @@ def openContentsAndProcess(Fname):
 
 if __name__== "__main__":
     #path = 'GreenOnly/Green1Red0_'
-    path = 'RedOnly/Green0RedNeg1_'
+    #path = 'RedOnly/Green0RedNeg1_'
     #path = 'ApatureTests/70/GreenOnly/Green1Red0_'
+    #path = 'ApatureTests/70/RedOnly/Green0_RedNeg1_'
+    #path = 'ApatureTests/70/Both/Green1_RedNeg1_'
+    path = 'ApatureTests/75/GreenOnly/Green1_Red0_'
+    #path = 'ApatureTests/75/RedOnly/Green0_RedNeg1_'
+    #path = 'ApatureTests/75/Both/Green1_RedNeg1_'
     pl.clf()
     pl.figure(figsize=(10, 5))
     for i in range(25):
