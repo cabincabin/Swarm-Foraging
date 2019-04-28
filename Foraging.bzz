@@ -253,7 +253,7 @@ function init(){
 
 #state maching
 function step() {
-	point2 = {.x = 2.0, .y =2.0}
+	point2 = {.x = 0.0, .y =0.0}
 
   log("[=",count,"]: ", id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
 	#if we found the food, remember that we did and remember where we found it

@@ -7,8 +7,7 @@
   <framework>
     <system threads="40" />
     <experiment length="0"
-                ticks_per_second="10"
-                random_seed="12" />
+                ticks_per_second="10"/>
   </framework>
 
   <!-- *************** -->
@@ -27,7 +26,7 @@
         <range_and_bearing implementation="medium" medium="rab" show_rays="false" />
         <footbot_light   implementation="rot_z_only" show_rays="false"/>
         <colored_blob_omnidirectional_camera implementation="rot_z_only"
-                                     medium="leds" show_rays="false" />
+                                     medium="leds" show_rays="true" />
         <footbot_proximity implementation="default" show_rays="false" />
         <positioning implementation="default"/>
       </sensors>
@@ -86,7 +85,7 @@
       <position method="uniform" min="-4,-4,0" max="4,4,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
       <entity quantity="40" max_trials="100">
-        <foot-bot id="fb" omnidirectional_camera_aperture="82">
+        <foot-bot id="fb" omnidirectional_camera_aperture="73">
           <controller config="shape_formation" />
         </foot-bot>
       </entity>
@@ -114,8 +113,8 @@
   <!-- * Visualization * -->
   <!-- ****************** -->
 
-<!--
-  <visualization>
+
+  <!--<visualization>
     <qt-opengl>
       <user_functions label="buzz_qt" />
     </qt-opengl>
