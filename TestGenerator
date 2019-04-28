@@ -1,6 +1,6 @@
 #!/bin/bash
 for i in {1..25}
 do
-	touch ./ApatureTests/75/RedOnly/Green0_RedNeg1_$i.txt; argos3 -c Foraging.argos > ./ApatureTests/75/RedOnly/Green0_RedNeg1_$i.txt &
+	touch ./Tests04_28/test_$i.txt; argos3 -c Foraging.argos > ./Tests04_28/test_$i.txt &
 done
 echo Done :D

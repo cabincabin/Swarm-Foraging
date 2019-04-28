@@ -5,7 +5,7 @@
 # var another_counter = 0
 
 #-------------------LED STUFF--------------------------#
-
+count = 0
 
 function reset_led() {
 	var counter = 0
@@ -263,7 +263,7 @@ function step() {
 		debug.rays.add(255,0,0, -num * 5, -num2 * 5,0.0)
 		point2 = {.x = -1.75, .y =1.75}
 		found_food = 1
-		log(id,"-","1")
+		log("[=",count,"]: ",id,"-","1")
 	}
 	#if we have found food at one point, update our lights to point to the food
 	else if(found_food == 1){
