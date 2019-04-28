@@ -1,0 +1,6 @@
+#!/bin/bash
+for i in {1..25}
+do
+	touch ./ApatureTests/75/RedOnly/Green0_RedNeg1_$i.txt; argos3 -c Foraging.argos > ./ApatureTests/75/RedOnly/Green0_RedNeg1_$i.txt &
+done
+echo Done :D
