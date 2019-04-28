@@ -274,7 +274,7 @@ function step() {
 		obstacle_avoidance_blob()
 	}
 
-
+	count = count + 1
 #__________________________________#
 }
 
