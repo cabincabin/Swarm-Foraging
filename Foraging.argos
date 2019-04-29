@@ -2,13 +2,12 @@
 <argos-configuration>
 
   <!-- ************************* -->
-  <!-- * General configuration * -->
+  <!-- * General configuration * bytecode_file="Foraging.bo" debug_file="Foraging.bdb">-->
   <!-- ************************* -->
   <framework>
     <system threads="40" />
     <experiment length="0"
-                ticks_per_second="10"
-                random_seed="123" />
+                ticks_per_second="10" />
   </framework>
 
   <!-- *************** -->
@@ -30,7 +29,7 @@
         <footbot_proximity implementation="default" show_rays="false" />
         <positioning implementation="default"/>
       </sensors>
-      <params>
+      <params bytecode_file="Foraging.bo" debug_file="Foraging.bdb">
         <wheel_turning hard_turn_angle_threshold="90"
                        soft_turn_angle_threshold="70"
                        no_turn_angle_threshold="10"
@@ -112,10 +111,11 @@
   <!-- ****************** -->
   <!-- * Visualization * -->
   <!-- ****************** -->
+<!--
   <visualization>
     <qt-opengl>
       <user_functions label="buzz_qt" />
     </qt-opengl>
-  </visualization>
+  </visualization>-->
 
 </argos-configuration>

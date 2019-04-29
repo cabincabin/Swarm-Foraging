@@ -227,12 +227,14 @@ function at_food() {
 
 # Initialization
 function init(){
+count = 0
 	camera_enable()
 	found_food = 0
 }
 
 #state maching
 function step() {
+count = count + 1
     #log(id,"-",math.sqrt(pose.position.x*pose.position.x + pose.position.y*pose.position.y))
 	#if we found the food, remember that we did and remember where we found it
 	if((found_food == 0) and at_food()){
@@ -244,15 +246,16 @@ function step() {
 
 		point2 = {.x = -1.75, .y =1.75}
 		found_food = 1
-		log(id,"-","1")
+		log("=",count,"]: ",id,"-","1")
 	}
 	#if we have found food at one point, update our lights to point to the food
 	else if(found_food == 1){
-		determine_half(point2)
+		#determine_half(point2)
 		random_walk()
 	}
 	else{
-		SumBlobsMoveInForce(50, 0.01)
+		random_walk()
+		#SumBlobsMoveInForce(50, 0.01)
 	}
 
 
